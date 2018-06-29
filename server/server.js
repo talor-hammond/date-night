@@ -1,12 +1,10 @@
 const path = require('path')
 const express = require('express')
 
-const fruitRoutes = require('./routes/fruits')
-
+// Initialising server-object
 const server = express()
 
+// Middleware
 server.use(express.static(path.join(__dirname, 'public')))
-
-server.use('/api/v1/fruits', fruitRoutes)
 
 module.exports = server

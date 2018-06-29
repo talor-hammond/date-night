@@ -1,34 +1,25 @@
 import React from 'react'
 
-import {getFruits} from '../apiClient'
+// Imports from apiCLient.js:
+import {getMainCourseBy} from '../apiClient'
 
 class App extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      fruits: []
-    }
   }
 
   componentDidMount () {
-    getFruits()
-      .then(fruits => {
-        this.setState({fruits})
-      })
+    getMainCourseBy()
   }
 
   render () {
     return (
-      <div className='app'>
-        <h1>Fullstack Boilerplate</h1>
-        <ul>
-          {this.state.fruits.map(fruit => (
-            <li key={fruit}>{fruit}</li>
-          ))}
-        </ul>
+      <div>
+        <h1>Lol</h1>
       </div>
     )
   }
 }
 
 export default App
+

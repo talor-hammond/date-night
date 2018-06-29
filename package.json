@@ -21,7 +21,9 @@
     ]
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "fs": "^0.0.1-security",
+    "unirest": "^0.5.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
