@@ -21722,19 +21722,23 @@ var Home = function Home(props) {
         _react2.default.Fragment,
         null,
         _react2.default.createElement(
-            'header',
-            null,
+            'div',
+            { className: 'container' },
             _react2.default.createElement(
-                'marquee',
+                'header',
                 null,
                 _react2.default.createElement(
-                    'h1',
+                    'marquee',
                     null,
-                    'datenite'
+                    _react2.default.createElement(
+                        'h1',
+                        null,
+                        'datenite'
+                    )
                 )
-            )
-        ),
-        _react2.default.createElement(_Form2.default, null)
+            ),
+            _react2.default.createElement(_Form2.default, null)
+        )
     );
 };
 
@@ -21788,63 +21792,125 @@ var Form = function (_React$Component) {
         };
 
         _this.handleChange = _this.handleChange.bind(_this);
+        _this.changeWinePairingBool = _this.changeWinePairingBool.bind(_this);
         return _this;
     }
 
     _createClass(Form, [{
         key: 'handleChange',
         value: function handleChange(e) {
+            console.log(e.target.value);
 
             var inputs = this.state;
             inputs[e.target.name] = e.target.value;
         }
+    }, {
+        key: 'changeWinePairingBool',
+        value: function changeWinePairingBool() {
+            this.state.winePairing = !this.state.winePairing;
+        }
+    }, {
+        key: 'getResults',
+        value: function getResults(nameOne, nameTwo, food, cuisine, winePairing, email) {}
     }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
 
             return _react2.default.createElement(
-                'form',
+                _react2.default.Fragment,
                 null,
                 _react2.default.createElement(
-                    'label',
+                    'form',
                     null,
-                    'Who\'s going?'
-                ),
-                _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
-                        return _this2.handleChange(e);
-                    }, name: 'nameOne' }),
-                _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
-                        return _this2.handleChange(e);
-                    }, name: 'nameTwo' }),
-                _react2.default.createElement(
-                    'label',
-                    null,
-                    'What do you feel like?'
-                ),
-                _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
-                        return _this2.handleChange(e);
-                    }, name: 'food', placeholder: 'Pasta, steak, curry, etc.' }),
-                _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
-                        return _this2.handleChange(e);
-                    }, name: 'cuisine', placeholder: 'Italian, thai, chinese, etc.' }),
-                _react2.default.createElement(
-                    'label',
-                    null,
-                    'Wine pairing?'
-                ),
-                _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
-                        return _this2.handleChange(e);
-                    }, name: 'winePairing' }),
-                _react2.default.createElement(
-                    'label',
-                    null,
-                    'An email address to send the menu + recipes to:'
-                ),
-                _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
-                        return _this2.handleChange(e);
-                    }, name: 'email' }),
-                _react2.default.createElement('input', { type: 'submit' })
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            'Who\'s going?'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', name: 'nameOne', className: 'form-control', onChange: function onChange(e) {
+                                return _this2.handleChange(e);
+                            } }),
+                        _react2.default.createElement('input', { type: 'text', name: 'nameTwo', className: 'form-control', onChange: function onChange(e) {
+                                return _this2.handleChange(e);
+                            } }),
+                        _react2.default.createElement(
+                            'small',
+                            { className: 'form-text text-muted' },
+                            'Testing, testing'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            'What do you feel like?'
+                        ),
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            'Food:'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', name: 'food', className: 'form-control', onChange: function onChange(e) {
+                                return _this2.handleChange(e);
+                            } }),
+                        _react2.default.createElement(
+                            'small',
+                            { className: 'form-text text-muted' },
+                            'Pasta, curry, mulch, etc.'
+                        ),
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            'Cuisine:'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', name: 'cuisine', className: 'form-control', onChange: function onChange(e) {
+                                return _this2.handleChange(e);
+                            } }),
+                        _react2.default.createElement(
+                            'small',
+                            { className: 'form-text text-muted' },
+                            'Italian, thai, chinese, etc.'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-check' },
+                        _react2.default.createElement('input', { type: 'checkbox', className: 'form-check-input', onClick: function onClick() {
+                                return _this2.changeWinePairingBool();
+                            }, 'data-size': 'normal', 'data-toggle': 'toggle', name: 'winePairing' }),
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            'Wine pairing?'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            'An email address to send the menu & recipes to:'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', className: 'form-control', onChange: function onChange(e) {
+                                return _this2.handleChange(e);
+                            }, name: 'email' })
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { type: 'submit', onClick: function onClick() {
+                                return _this2.getResults(_this2.state);
+                            }, 'class': 'btn btn-primary' },
+                        'Submit'
+                    )
+                )
             );
         }
     }]);

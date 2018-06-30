@@ -10,11 +10,13 @@ const Home = (props) => {
 
     return (
         <React.Fragment>
-            <header>
-                <marquee><h1>datenite</h1></marquee>
-            </header>
+            <div className="container">
+                <header>
+                    <marquee><h1>datenite</h1></marquee>
+                </header>
 
-            <Form />
+                <Form />
+            </div>
         </React.Fragment>
     )
 
