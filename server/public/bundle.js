@@ -19529,7 +19529,13 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Home = __webpack_require__(34);
+
+var _Home2 = _interopRequireDefault(_Home);
+
 var _apiClient = __webpack_require__(27);
+
+var _apiClient2 = _interopRequireDefault(_apiClient);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19538,6 +19544,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// Components:
+
 
 // Imports from apiCLient.js:
 
@@ -19549,24 +19558,23 @@ var App = function (_React$Component) {
     _classCallCheck(this, App);
 
     return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    // setting state on primary render...
   }
 
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      (0, _apiClient.getMainCourseBy)();
+      // setting state on secondary render...
+
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        _react2.default.Fragment,
         null,
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Lol'
-        )
+        _react2.default.createElement(_Home2.default, null)
       );
     }
   }]);
@@ -19586,7 +19594,11 @@ exports.default = App;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getMainCourseBy = getMainCourseBy;
+exports.getEntreeBy = getEntreeBy;
+exports.getMainBy = getMainBy;
+exports.getDessertBy = getDessertBy;
+exports.getWinePairingWith = getWinePairingWith;
+exports.getRecipeBy = getRecipeBy;
 
 var _superagent = __webpack_require__(28);
 
@@ -19595,18 +19607,45 @@ var _superagent2 = _interopRequireDefault(_superagent);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // API constants:
-var mashapeKey = "4MvakPXpX5mshEZQpyMAEmrVjTBCp1AkUO9jsncy4Kb9PZQYNJ"; // Functions for requests to api:
-
-// http request client
-// import unirest from 'unirest'
+var mashapeKey = "4MvakPXpX5mshEZQpyMAEmrVjTBCp1AkUO9jsncy4Kb9PZQYNJ"; // apiClient -- functions for requests to api:
 
 var mashapeHost = "spoonacular-recipe-food-nutrition-v1.p.mashape.com";
 
-function getMainCourseBy(cuisine, food) {
-
-  _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?cuisine=italian&number=100&offset=0&query=pasta&type=main+course").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object
+// Functions ------------------------------------------------------------------------------------------------
+function getEntreeBy(food, cuisine, diet) {
+  // getting array of entrees...
+  _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=" + food + "&cuisine=" + cuisine + "&diet=" + diet + "&limitLicense=false&type=appetizer&minCalories=700&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
   .end(function (err, res) {
     console.log(res.body.results);
+  });
+}
+
+function getMainBy(food, cuisine, diet) {
+  // getting array of mains...
+  _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=" + food + "&cuisine=" + cuisine + "&diet=" + diet + "&limitLicense=false&type=main+course&minCalories=1000&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }).end(function (err, res) {
+    console.log(res.body.results);
+  });
+}
+
+function getDessertBy(food) {
+
+  _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=" + food + "&limitLicense=false&type=dessert&ranking=2&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }).end(function (err, res) {
+    console.log(res.body);
+  });
+}
+
+function getWinePairingWith(food) {
+
+  _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/wine/pairing?food=" + food).set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }).end(function (err, res) {
+    console.log(res.body);
+  });
+}
+
+// Recipe information:
+function getRecipeBy(id) {
+
+  _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + id + "/information").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }).end(function (err, res) {
+    console.log(res.body);
   });
 }
 
@@ -21650,6 +21689,170 @@ Agent.prototype._setDefaults = function(req) {
 
 module.exports = Agent;
 
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Form = __webpack_require__(35);
+
+var _Form2 = _interopRequireDefault(_Form);
+
+var _apiClient = __webpack_require__(27);
+
+var _apiClient2 = _interopRequireDefault(_apiClient);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Components:
+var Home = function Home(props) {
+
+    return _react2.default.createElement(
+        _react2.default.Fragment,
+        null,
+        _react2.default.createElement(
+            'header',
+            null,
+            _react2.default.createElement(
+                'marquee',
+                null,
+                _react2.default.createElement(
+                    'h1',
+                    null,
+                    'datenite'
+                )
+            )
+        ),
+        _react2.default.createElement(_Form2.default, null)
+    );
+};
+
+// Imports from apiCLient.js:
+exports.default = Home;
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _apiClient = __webpack_require__(27);
+
+var _apiClient2 = _interopRequireDefault(_apiClient);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Form = function (_React$Component) {
+    _inherits(Form, _React$Component);
+
+    function Form(props) {
+        _classCallCheck(this, Form);
+
+        var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
+
+        _this.state = {
+            nameOne: '',
+            nameTwo: '',
+            food: '',
+            cuisine: '',
+            winePairing: false,
+            email: ''
+        };
+
+        _this.handleChange = _this.handleChange.bind(_this);
+        return _this;
+    }
+
+    _createClass(Form, [{
+        key: 'handleChange',
+        value: function handleChange(e) {
+
+            var inputs = this.state;
+            inputs[e.target.name] = e.target.value;
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                'form',
+                null,
+                _react2.default.createElement(
+                    'label',
+                    null,
+                    'Who\'s going?'
+                ),
+                _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
+                        return _this2.handleChange(e);
+                    }, name: 'nameOne' }),
+                _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
+                        return _this2.handleChange(e);
+                    }, name: 'nameTwo' }),
+                _react2.default.createElement(
+                    'label',
+                    null,
+                    'What do you feel like?'
+                ),
+                _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
+                        return _this2.handleChange(e);
+                    }, name: 'food', placeholder: 'Pasta, steak, curry, etc.' }),
+                _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
+                        return _this2.handleChange(e);
+                    }, name: 'cuisine', placeholder: 'Italian, thai, chinese, etc.' }),
+                _react2.default.createElement(
+                    'label',
+                    null,
+                    'Wine pairing?'
+                ),
+                _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
+                        return _this2.handleChange(e);
+                    }, name: 'winePairing' }),
+                _react2.default.createElement(
+                    'label',
+                    null,
+                    'An email address to send the menu + recipes to:'
+                ),
+                _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
+                        return _this2.handleChange(e);
+                    }, name: 'email' }),
+                _react2.default.createElement('input', { type: 'submit' })
+            );
+        }
+    }]);
+
+    return Form;
+}(_react2.default.Component);
+
+exports.default = Form;
 
 /***/ })
 /******/ ]);

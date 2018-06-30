@@ -1,22 +1,29 @@
 import React from 'react'
 
+// Components:
+import Home from './Home'
+
 // Imports from apiCLient.js:
-import {getMainCourseBy} from '../apiClient'
+import api from '../apiClient'
 
 class App extends React.Component {
   constructor (props) {
     super(props)
+
+    // setting state on primary render...
+
   }
 
   componentDidMount () {
-    getMainCourseBy()
+    // setting state on secondary render...
+
   }
 
   render () {
     return (
-      <div>
-        <h1>Lol</h1>
-      </div>
+      <React.Fragment>
+        <Home />
+      </React.Fragment>
     )
   }
 }
