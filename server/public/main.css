@@ -1,5 +1,38 @@
+/* Fonts:
+https://fonts.google.com/specimen/Pacifico?selection.family=Pacifico
+
+Colors: 
+#EAEAEA - off-white
+*/
+
+
+/* Add when scroll to right styling for inputs are made. */
+/* html {
+    overflow: hidden;
+} */
+
 body {
     margin: 0;
     padding: 0;
-    background-color: #EAEAEA;
+    font-family: 'Open Sans', sans-serif;
+    background-color: tomato;
+}
+
+nav {
+    width: 100%;
+    height: 45px;
+    top: 0;
+    background-color: white;
+    margin-bottom: 100px;
+}
+
+nav .navbar-text {
+    font-family: 'Pacifico', cursive;
+    font-size: 21px;
+    color: tomato;
+    margin: 0 auto;
+} 
+
+.container {
+    width: 50%;
 }
