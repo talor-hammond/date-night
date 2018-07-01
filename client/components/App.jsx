@@ -12,6 +12,27 @@ import api from '../apiClient'
 class App extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      submitted: false,
+      nameOne: '',
+      nameTwo: '',
+      food: '',
+      cuisine: '',
+      winePairing: false,
+      email: ''
+    }
+
+    // this.updateState = this.updateState.bind(this)
+  }
+
+  // updateState(state) {
+  //   this.state.submitted = true
+  //   this.setState(state)
+  // }
+
+  componentDidMount() {
+    api.getMainBy('pasta', 'italian')
   }
 
   render() {

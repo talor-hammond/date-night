@@ -19567,10 +19567,32 @@ var App = function (_React$Component) {
   function App(props) {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    _this.state = {
+      submitted: false,
+      nameOne: '',
+      nameTwo: '',
+      food: '',
+      cuisine: '',
+      winePairing: false,
+      email: ''
+
+      // this.updateState = this.updateState.bind(this)
+    };return _this;
   }
 
+  // updateState(state) {
+  //   this.state.submitted = true
+  //   this.setState(state)
+  // }
+
   _createClass(App, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _apiClient2.default.getMainBy('pasta', 'italian');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -19599,15 +19621,6 @@ exports.default = App;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getEntreeBy = getEntreeBy;
-exports.getMainBy = getMainBy;
-exports.getDessertBy = getDessertBy;
-exports.getWinePairingWith = getWinePairingWith;
-exports.getRecipeBy = getRecipeBy;
-
 var _superagent = __webpack_require__(28);
 
 var _superagent2 = _interopRequireDefault(_superagent);
@@ -19622,17 +19635,58 @@ var mashapeHost = "spoonacular-recipe-food-nutrition-v1.p.mashape.com";
 // Functions ------------------------------------------------------------------------------------------------
 function getEntreeBy(food, cuisine, diet) {
   // getting array of entrees...
-  _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=" + food + "&cuisine=" + cuisine + "&diet=" + diet + "&limitLicense=false&type=appetizer&minCalories=700&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
-  .end(function (err, res) {
-    console.log(res.body.results);
-  });
+
+  if (diet) {
+    _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=" + food + "&cuisine=" + cuisine + "&diet=" + diet + "&limitLicense=false&type=appetizer&minCalories=700&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
+    .end(function (err, res) {
+      console.log(res.body.results);
+    });
+  } else {
+    _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=" + food + "&cuisine=" + cuisine + "&limitLicense=false&type=appetizer&minCalories=700&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
+    .end(function (err, res) {
+      console.log(res.body.results);
+    });
+  }
 }
 
 function getMainBy(food, cuisine, diet) {
   // getting array of mains...
-  _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=" + food + "&cuisine=" + cuisine + "&diet=" + diet + "&limitLicense=false&type=main+course&minCalories=1000&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }).end(function (err, res) {
-    console.log(res.body.results);
-  });
+
+  // if a diet was specified:
+  if (diet) {
+    _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=" + food + "&cuisine=" + cuisine + "&diet=" + diet + "&limitLicense=false&type=main+course&minCalories=700&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
+    .end(function (err, res) {
+
+      var results = res.body.results;
+
+      // getting main at a random index between 0 and 99:
+      var main = results[Math.floor(Math.random() * results.length)];
+
+      // assigning the title and id of the main to an object which we can return for reference:
+      var mainResults = {
+        title: main.title,
+        id: main.id
+      };
+
+      return mainResults; // returning; setting up for use with .then
+    });
+  } else {
+    _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=" + food + "&cuisine=" + cuisine + "&limitLicense=false&type=main+course&minCalories=700&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
+    .end(function (err, res) {
+      var results = res.body.results;
+
+      // getting main at a random index between 0 and 99:
+      var main = results[Math.floor(Math.random() * results.length)];
+
+      // assigning the title and id of the main to an object which we can return for reference:
+      var mainResults = {
+        title: main.title,
+        id: main.id
+      };
+
+      return mainResults; // returning; setting up for use with .then
+    });
+  }
 }
 
 function getDessertBy(food) {
@@ -19656,6 +19710,14 @@ function getRecipeBy(id) {
     console.log(res.body);
   });
 }
+
+module.exports = {
+  getEntreeBy: getEntreeBy,
+  getMainBy: getMainBy,
+  getDessertBy: getDessertBy,
+  getWinePairingWith: getWinePairingWith,
+  getRecipeBy: getRecipeBy
+};
 
 /***/ }),
 /* 28 */
