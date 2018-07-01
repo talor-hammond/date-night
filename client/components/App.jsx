@@ -32,7 +32,7 @@ class App extends React.Component {
   // }
 
   componentDidMount() {
-    api.getMainBy('pasta', 'italian')
+    api.getEntreeBy('italian')
   }
 
   render() {

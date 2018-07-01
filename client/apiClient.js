@@ -7,23 +7,41 @@ const mashapeKey = "4MvakPXpX5mshEZQpyMAEmrVjTBCp1AkUO9jsncy4Kb9PZQYNJ"
 const mashapeHost = "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
 
 // Functions ------------------------------------------------------------------------------------------------
-function getEntreeBy(food, cuisine, diet) {
+function getEntreeBy(cuisine, diet) {
   // getting array of entrees...
 
   if (diet) {
     request
-      .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=${food}&cuisine=${cuisine}&diet=${diet}&limitLicense=false&type=appetizer&minCalories=700&offset=0&number=100`)
+      .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?cuisine=${cuisine}&diet=${diet}&limitLicense=false&type=appetizer&minCalories=500&offset=0&number=100`)
       .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
       .end((err, res) => {
-        console.log(res.body.results);
-      });
+        let results = (res.body.results)
+        let entree = results[Math.floor(Math.random() * results.length)]
+
+        // assigning the title and id of the entree to an object which we can return for reference:
+        let entreeResults = {
+          title: entree.title,
+          id: entree.id
+        }
+
+        return entreeResults // returning; setting up for use with .then
+      })
   } else {
     request
-      .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=${food}&cuisine=${cuisine}&limitLicense=false&type=appetizer&minCalories=700&offset=0&number=100`)
+      .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?cuisine=${cuisine}&limitLicense=false&type=appetizer&minCalories=500&offset=0&number=100`)
       .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
       .end((err, res) => {
-        console.log(res.body.results);
-      });
+        let results = (res.body.results)
+        let entree = results[Math.floor(Math.random() * results.length)]
+
+        // assigning the title and id of the entree to an object which we can return for reference:
+        let entreeResults = {
+          title: entree.title,
+          id: entree.id
+        }
+
+        return entreeResults // returning; setting up for use with .then
+      })
   }
 }
 
