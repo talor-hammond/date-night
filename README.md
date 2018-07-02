@@ -14,5 +14,10 @@ Building a three-course menu & wine-pairing with a few queries + other stuff goi
 
 * Superagent
     * <https://visionmedia.github.io/superagent/>
-    * Really good practice w promises thus far -- remember to **return** if you need your call to wait!
+    
+
+* Promises
+    * Really good practice w promises thus far -- remember to **return** request if you need your call to wait for a return value!
+    * *Promise.all()*
+        * Used this method to tell the program to wait for all ids to be pushed to an array before mapping
 

@@ -54,8 +54,6 @@ function getMainBy(food, cuisine, diet) {
       .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
       .then((res) => {
 
-        console.log('Request is working...')
-
         let mains = res.body.results
 
         // getting main at a random index between 0 and 99:
@@ -99,7 +97,7 @@ function getDessert() {
     .then((res) => {
       let desserts = res.body.results
 
-      let dessert = desserts[Math.floor(Math.random() * results.length)]
+      let dessert = desserts[Math.floor(Math.random() * desserts.length)]
 
       let dessertResults = {
         title: dessert.title,

@@ -24,9 +24,9 @@ class Form extends React.Component {
         this.getResults = this.getResults.bind(this)
     }
 
-    // componentDidMount() {
-
-    // }
+    componentDidMount() {
+        api.getWinePairingWith('steak')
+    }
 
     handleChange(e) {
         const inputs = this.state
@@ -53,45 +53,71 @@ class Form extends React.Component {
             email
         }
 
-        let recipeIds = []
 
-        api.getEntreeBy(cuisine, diet)
-            .then(entree => {
+        // TODO: promise.all on these three!
+        Promise.all([api.getEntreeBy(cuisine, diet), api.getMainBy(food, cuisine, diet), api.getDessert()])
+            .then(returns => {
+                // assigning each object in returns array to an object
+                let entree = returns[0]
+                let main = returns[1]
+                let dessert = returns[2]
+
+                // building menu...
                 menu.entree = entree.title
-                recipeIds.push(entree.id)
-
-                console.log(menu, recipeIds)
-            })
-
-        api.getMainBy(food, cuisine, diet)
-            .then(main => {
                 menu.main = main.title
-                recipeIds.push(menu.id)
-
-                console.log(menu, recipeIds)
-            })
-
-        api.getDessert()
-            .then(dessert => {
                 menu.dessert = dessert.title
-                recipeIds.push(dessert.id)
-                console.log(menu, recipeIds)
-            })
+                
+                // setting a recipeIds array...
+                let recipeIds = []
 
-        api.getWinePairingWith(food)
-            .then(wine => {
-                menu.wine = wine
-                console.log(menu)
-            })
-
-        // mapping through the ids, and performing a request and returning the recipe object for each one:
-        recipesIds.map(id => {
-            api.getRecipesBy(id)
-                .then(recipe => {
-                    this.state.recipes.push(recipe) // pushing each recipe object into our recipes array
-                    console.log(this.state.recipes)
+                // pushing ids to the recipeIds array...
+                returns.map(item => {
+                    recipeIds.push(item.id)
                 })
-        })
+
+                console.log('Menu: ', menu)
+                console.log('-----------------------')
+                console.log('Recipe ids: ', recipeIds)
+            })
+
+        // api.getEntreeBy(cuisine, diet)
+        //     .then(entree => {
+        //         menu.entree = entree.title
+        //         recipeIds.push(entree.id)
+
+        //         console.log(menu, recipeIds)
+        //     })
+
+        // api.getMainBy(food, cuisine, diet)
+        //     .then(main => {
+        //         menu.main = main.title
+        //         recipeIds.push(main.id)
+
+        //         console.log(menu, recipeIds)
+        //     })
+
+        // api.getDessert()
+        //     .then(dessert => {
+        //         menu.dessert = dessert.title
+        //         recipeIds.push(dessert.id)
+        //         console.log(menu, recipeIds)
+        //     })
+
+        // api.getWinePairingWith(food)
+        //     .then(wine => {
+        //         console.log(wine)
+        //         menu.wine = wine
+        //         console.log(menu)
+        //     })
+
+        // // mapping through the ids, and performing a request and returning the recipe object for each one:
+        // recipeIds.map((id) => { // NOTE: tell this to wait for all the Ids to be pushed
+        //     api.getRecipesBy(id)
+        //         .then(recipe => {
+        //             this.state.recipes.push(recipe) // pushing each recipe object into our recipes array
+        //             console.log(this.state.recipes)
+        //         })
+        // })
 
     }
 

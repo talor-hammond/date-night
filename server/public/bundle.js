@@ -19662,11 +19662,12 @@ var Form = function (_React$Component) {
         return _this;
     }
 
-    // componentDidMount() {
-
-    // }
-
     _createClass(Form, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _apiClient2.default.getWinePairingWith('steak');
+        }
+    }, {
         key: 'handleChange',
         value: function handleChange(e) {
             var inputs = this.state;
@@ -19688,55 +19689,81 @@ var Form = function (_React$Component) {
     }, {
         key: 'getResults',
         value: function getResults(nameOne, nameTwo, food, cuisine, diet, email) {
-            var _this2 = this;
-
             // TODO: params -> object????
 
             var menu = { // re-assign as each api method returns what u want
                 nameOne: nameOne,
                 nameTwo: nameTwo,
                 email: email
-            };
 
-            var recipeIds = [];
+                // TODO: promise.all on these three!
+            };Promise.all([_apiClient2.default.getEntreeBy(cuisine, diet), _apiClient2.default.getMainBy(food, cuisine, diet), _apiClient2.default.getDessert()]).then(function (returns) {
+                // assigning each object in returns array to an object
+                var entree = returns[0];
+                var main = returns[1];
+                var dessert = returns[2];
 
-            _apiClient2.default.getEntreeBy(cuisine, diet).then(function (entree) {
+                // building menu...
                 menu.entree = entree.title;
-                recipeIds.push(entree.id);
-
-                console.log(menu, recipeIds);
-            });
-
-            _apiClient2.default.getMainBy(food, cuisine, diet).then(function (main) {
                 menu.main = main.title;
-                recipeIds.push(menu.id);
-
-                console.log(menu, recipeIds);
-            });
-
-            _apiClient2.default.getDessert().then(function (dessert) {
                 menu.dessert = dessert.title;
-                recipeIds.push(dessert.id);
-                console.log(menu, recipeIds);
-            });
 
-            _apiClient2.default.getWinePairingWith(food).then(function (wine) {
-                menu.wine = wine;
-                console.log(menu);
-            });
+                // setting a recipeIds array...
+                var recipeIds = [];
 
-            // mapping through the ids, and performing a request and returning the recipe object for each one:
-            recipesIds.map(function (id) {
-                _apiClient2.default.getRecipesBy(id).then(function (recipe) {
-                    _this2.state.recipes.push(recipe); // pushing each recipe object into our recipes array
-                    console.log(_this2.state.recipes);
+                // pushing ids to the recipeIds array...
+                returns.map(function (item) {
+                    recipeIds.push(item.id);
                 });
+
+                console.log('Menu: ', menu);
+                console.log('-----------------------');
+                console.log('Recipe ids: ', recipeIds);
             });
+
+            // api.getEntreeBy(cuisine, diet)
+            //     .then(entree => {
+            //         menu.entree = entree.title
+            //         recipeIds.push(entree.id)
+
+            //         console.log(menu, recipeIds)
+            //     })
+
+            // api.getMainBy(food, cuisine, diet)
+            //     .then(main => {
+            //         menu.main = main.title
+            //         recipeIds.push(main.id)
+
+            //         console.log(menu, recipeIds)
+            //     })
+
+            // api.getDessert()
+            //     .then(dessert => {
+            //         menu.dessert = dessert.title
+            //         recipeIds.push(dessert.id)
+            //         console.log(menu, recipeIds)
+            //     })
+
+            // api.getWinePairingWith(food)
+            //     .then(wine => {
+            //         console.log(wine)
+            //         menu.wine = wine
+            //         console.log(menu)
+            //     })
+
+            // // mapping through the ids, and performing a request and returning the recipe object for each one:
+            // recipeIds.map((id) => { // NOTE: tell this to wait for all the Ids to be pushed
+            //     api.getRecipesBy(id)
+            //         .then(recipe => {
+            //             this.state.recipes.push(recipe) // pushing each recipe object into our recipes array
+            //             console.log(this.state.recipes)
+            //         })
+            // })
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
+            var _this2 = this;
 
             return _react2.default.createElement(
                 _react2.default.Fragment,
@@ -19759,7 +19786,7 @@ var Form = function (_React$Component) {
                                 'div',
                                 { className: 'col' },
                                 _react2.default.createElement('input', { type: 'text', name: 'nameOne', className: 'form-control', onChange: function onChange(e) {
-                                        return _this3.handleChange(e);
+                                        return _this2.handleChange(e);
                                     } })
                             ),
                             _react2.default.createElement(
@@ -19771,7 +19798,7 @@ var Form = function (_React$Component) {
                                 'div',
                                 { className: 'col' },
                                 _react2.default.createElement('input', { type: 'text', name: 'nameTwo', className: 'form-control', onChange: function onChange(e) {
-                                        return _this3.handleChange(e);
+                                        return _this2.handleChange(e);
                                     } })
                             )
                         ),
@@ -19789,7 +19816,7 @@ var Form = function (_React$Component) {
                                 'Food:'
                             ),
                             _react2.default.createElement('input', { type: 'text', name: 'food', className: 'form-control', onChange: function onChange(e) {
-                                    return _this3.handleChange(e);
+                                    return _this2.handleChange(e);
                                 } }),
                             _react2.default.createElement(
                                 'small',
@@ -19803,7 +19830,7 @@ var Form = function (_React$Component) {
                                 'Cuisine:'
                             ),
                             _react2.default.createElement('input', { type: 'text', name: 'cuisine', className: 'form-control', onChange: function onChange(e) {
-                                    return _this3.handleChange(e);
+                                    return _this2.handleChange(e);
                                 } }),
                             _react2.default.createElement(
                                 'small',
@@ -19820,13 +19847,13 @@ var Form = function (_React$Component) {
                                 'An email address to send the menu & recipes to:'
                             ),
                             _react2.default.createElement('input', { type: 'email', className: 'form-control', onChange: function onChange(e) {
-                                    return _this3.handleChange(e);
+                                    return _this2.handleChange(e);
                                 }, name: 'email' })
                         ),
                         _react2.default.createElement(
                             'button',
                             { type: 'submit', onClick: function onClick(e) {
-                                    return _this3.submitButton(e);
+                                    return _this2.submitButton(e);
                                 }, className: 'btn btn-primary' },
                             'Submit'
                         )
@@ -19905,8 +19932,6 @@ function getMainBy(food, cuisine, diet) {
     return _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=" + food + "&cuisine=" + cuisine + "&diet=" + diet + "&limitLicense=false&type=main+course&minCalories=700&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
     .then(function (res) {
 
-      console.log('Request is working...');
-
       var mains = res.body.results;
 
       // getting main at a random index between 0 and 99:
@@ -19944,7 +19969,7 @@ function getDessert() {
   return _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false&type=dessert&ranking=2&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }).then(function (res) {
     var desserts = res.body.results;
 
-    var dessert = desserts[Math.floor(Math.random() * results.length)];
+    var dessert = desserts[Math.floor(Math.random() * desserts.length)];
 
     var dessertResults = {
       title: dessert.title,
