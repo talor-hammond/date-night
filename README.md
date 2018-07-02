@@ -17,7 +17,7 @@ Building a three-course menu & wine-pairing with a few queries + other stuff goi
     
 
 * *Promises*
-    * Really good practice w promises thus far -- remember to *return* request if you need your call to wait for a return value!
+    * Really good practice w promises thus far -- 
     * **Promise.all()**
-        * Used this method to tell the program to wait for all ids to be pushed to an array before mapping
-
+        * Issue where .map() was being used on an empty / partially empty array -- all the promises were being resolved in parallel; used Promise.all() to tell the program to wait for the three promises to return, *then* map through the array.
+        * **Array destructuring**: used array destructuring to assign variable to each index in the array, without having to do multiple declarations

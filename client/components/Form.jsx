@@ -41,18 +41,16 @@ class Form extends React.Component {
     getResults(nameOne, nameTwo, food, cuisine, diet) {
         // TODO: params -> object????
 
-        this.state.menu = { // re-assign as each api method returns what u want
+        this.state.menu = {
             nameOne,
             nameTwo,
         }
 
-        // TODO: promise.all on these three!
+        // TODO: promise.all on these three
         Promise.all([api.getEntreeBy(cuisine, diet), api.getMainBy(food, cuisine, diet), api.getDessert()])
             .then(returns => {
                 // assigning each object in returns array to an object
-                let entree = returns[0]
-                let main = returns[1]
-                let dessert = returns[2]
+                const [entree, main, dessert] = returns
 
                 // building menu in state...
                 this.state.menu.entree = entree.title

@@ -20,7 +20,7 @@ class App extends React.Component {
   updateState(state) {
     this.state.submitted = true
     this.setState(state)
-    console.log(this.state)
+    console.log(this.state.results)
   }
 
   goBack() {
@@ -32,7 +32,7 @@ class App extends React.Component {
         <React.Fragment>
 
           {!this.state.submitted && <Home updateState={this.updateState} />}
-          {this.state.submitted && <Results nameOne={...this.state.results} goBack={this.goBack} />}
+          {this.state.submitted && <Results {...this.state.results} goBack={this.goBack} />}
 
         </React.Fragment>
     )
