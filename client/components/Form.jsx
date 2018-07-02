@@ -24,6 +24,10 @@ class Form extends React.Component {
         this.getResults = this.getResults.bind(this)
     }
 
+    componentDidMount() {
+        // api.getWinePairingWith('steak')
+    }
+
 
     handleChange(e) {
         const inputs = this.state
@@ -42,9 +46,15 @@ class Form extends React.Component {
     }
 
     getResults(nameOne, nameTwo, food, cuisine, diet, email) {
+        // TODO: params -> object????
+
         // variables??
-        let menu = {} // re-assign as each api method returns what u want
-        // let recipes -- do after
+        let menu = {
+            nameOne,
+            nameTwo,
+            email
+        } // re-assign as each api method returns what u want
+        let recipeIds = []
 
         api.getEntreeBy(cuisine, diet)
             .then(entree => {
@@ -59,6 +69,20 @@ class Form extends React.Component {
                 console.log(main)
                 menu.main = main.title
                 // call get recipe by ID and add return value to recipes
+                console.log(menu)
+            })
+
+        api.getDessert()
+            .then(dessert => {
+                console.log(dessert)
+                menu.dessert = dessert.title
+                console.log(menu)
+            })
+
+        api.getWinePairingWith(food)
+            .then(wine => {
+                console.log(wine)
+                menu.wine = wine
                 console.log(menu)
             })
 
