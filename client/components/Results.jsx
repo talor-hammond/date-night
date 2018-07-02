@@ -1,6 +1,6 @@
 import React from 'react'
 
-import api from '../apiClient'
+import Nav from './Nav'
 
 class Results extends React.Component {
 
@@ -8,7 +8,15 @@ class Results extends React.Component {
         super(props)
     }
 
-    
+    componentDidMount() {
+        console.log(props)
+    }
+
+    render() {
+        return (
+            <Nav />
+        )
+    }
 
 }
 

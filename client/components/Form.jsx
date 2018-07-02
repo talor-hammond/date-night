@@ -38,13 +38,12 @@ class Form extends React.Component {
         // NOTE: can't I pass the object this.state???????
     }
 
-    getResults(nameOne, nameTwo, food, cuisine, diet, email) {
+    getResults(nameOne, nameTwo, food, cuisine, diet) {
         // TODO: params -> object????
 
         this.state.menu = { // re-assign as each api method returns what u want
             nameOne,
             nameTwo,
-            email
         }
 
         // TODO: promise.all on these three!
@@ -77,47 +76,12 @@ class Form extends React.Component {
                             this.state.recipes.push(recipe) // pushing each recipe object into our recipes array
                         })
                 })
-                console.log(this.state)
+                return this.state
+            })
+            .then((state) => {
+                this.props.updateState(state)
             })
 
-        // api.getEntreeBy(cuisine, diet)
-        //     .then(entree => {
-        //         menu.entree = entree.title
-        //         recipeIds.push(entree.id)
-
-        //         console.log(menu, recipeIds)
-        //     })
-
-        // api.getMainBy(food, cuisine, diet)
-        //     .then(main => {
-        //         menu.main = main.title
-        //         recipeIds.push(main.id)
-
-        //         console.log(menu, recipeIds)
-        //     })
-
-        // api.getDessert()
-        //     .then(dessert => {
-        //         menu.dessert = dessert.title
-        //         recipeIds.push(dessert.id)
-        //         console.log(menu, recipeIds)
-        //     })
-
-        // api.getWinePairingWith(food)
-        //     .then(wine => {
-        //         console.log(wine)
-        //         menu.wine = wine
-        //         console.log(menu)
-        //     })
-
-        // // mapping through the ids, and performing a request and returning the recipe object for each one:
-        // recipeIds.map((id) => { // NOTE: tell this to wait for all the Ids to be pushed
-        //     api.getRecipesBy(id)
-        //         .then(recipe => {
-        //             this.state.recipes.push(recipe) // pushing each recipe object into our recipes array
-        //             console.log(this.state.recipes)
-        //         })
-        // })
 
     }
 
@@ -149,10 +113,10 @@ class Form extends React.Component {
                             <small className="form-text text-muted">Italian, thai, chinese, etc.</small>
                         </div>
 
-                        <div className="form-group">
+                        {/* <div className="form-group">
                             <label>An email address to send the menu & recipes to:</label>
                             <input type="email" className="form-control" onChange={(e) => this.handleChange(e)} name="email" />
-                        </div>
+                        </div> */}
 
                         <button type="submit" onClick={(e) => this.submitButton(e)} className="btn btn-primary">Submit</button>
 

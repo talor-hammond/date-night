@@ -4,13 +4,13 @@ import React from 'react'
 import Form from './Form'
 import Nav from './Nav'
 
-const Home = () => {
+const Home = (props) => {
 
     return (
         <React.Fragment>
 
                 <Nav />
-                <Form />
+                <Form updateState={props.updateState}/>
 
         </React.Fragment>
     )
