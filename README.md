@@ -13,5 +13,6 @@ Building a three-course menu & wine-pairing with a few queries + other stuff goi
     * [Passing props to components in routes] <https://github.com/ReactTraining/react-router/issues/4105>
 
 * Superagent
-    <https://visionmedia.github.io/superagent/>
+    * <https://visionmedia.github.io/superagent/>
+    * Really good practice w promises thus far -- remember to **return** if you need your call to wait!
 

@@ -14,7 +14,8 @@ class Form extends React.Component {
             cuisine: '',
             diet: '',
             email: '',
-            results: {}
+            menu: {},
+            recipes: []
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -40,25 +41,26 @@ class Form extends React.Component {
         // NOTE: can't I pass the object this.state???????
     }
 
-    getResults(nameOne, nameTwo, food, cuisine, diet, winePairing, email) {
+    getResults(nameOne, nameTwo, food, cuisine, diet, email) {
         // variables??
-        
-        api.getEntreeBy(cuisine, diet)
-            .then(res => {
-                console.log(res)
-                return res
-            })
-            .then((entreeThing) => {
+        let menu = {} // re-assign as each api method returns what u want
+        // let recipes -- do after
 
+        api.getEntreeBy(cuisine, diet)
+            .then(entree => {
+                console.log(entree)
+                menu.entree = entree.title
+                console.log(menu)
             })
         // ERROR: cannot read property then of undefined
 
         api.getMainBy(food, cuisine, diet)
-            .then(res => {
-                console.log(res)
+            .then(main => {
+                console.log(main)
+                menu.main = main.title
+                // call get recipe by ID and add return value to recipes
+                console.log(menu)
             })
-
-        const entreeRecipe = api.getRecipeBy(entreeId)
 
     }
 

@@ -49,7 +49,6 @@ function getEntreeBy(cuisine, diet) {
 
         console.log(entreeResults);
         
-
         return entreeResults // returning; setting up for use with .then
       })
   }

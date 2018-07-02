@@ -19651,7 +19651,8 @@ var Form = function (_React$Component) {
             cuisine: '',
             diet: '',
             email: '',
-            results: {}
+            menu: {},
+            recipes: []
         };
 
         _this.handleChange = _this.handleChange.bind(_this);
@@ -19682,20 +19683,24 @@ var Form = function (_React$Component) {
         }
     }, {
         key: 'getResults',
-        value: function getResults(nameOne, nameTwo, food, cuisine, diet, winePairing, email) {
+        value: function getResults(nameOne, nameTwo, food, cuisine, diet, email) {
             // variables??
+            var menu = {}; // re-assign as each api method returns what u want
+            // let recipes -- do after
 
-            _apiClient2.default.getEntreeBy(cuisine, diet).then(function (res) {
-                console.log(res);
-                return res;
-            }).then(function (entreeThing) {});
+            _apiClient2.default.getEntreeBy(cuisine, diet).then(function (entree) {
+                console.log(entree);
+                menu.entree = entree.title;
+                console.log(menu);
+            });
             // ERROR: cannot read property then of undefined
 
-            _apiClient2.default.getMainBy(food, cuisine, diet).then(function (res) {
-                console.log(res);
+            _apiClient2.default.getMainBy(food, cuisine, diet).then(function (main) {
+                console.log(main);
+                menu.main = main.title;
+                // call get recipe by ID and add return value to recipes
+                console.log(menu);
             });
-
-            var entreeRecipe = _apiClient2.default.getRecipeBy(entreeId);
         }
     }, {
         key: 'render',
