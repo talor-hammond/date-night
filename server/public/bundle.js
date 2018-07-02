@@ -19650,8 +19650,8 @@ var Form = function (_React$Component) {
             food: '',
             cuisine: '',
             diet: '',
-            winePairing: false,
-            email: ''
+            email: '',
+            results: {}
         };
 
         _this.handleChange = _this.handleChange.bind(_this);
@@ -19683,11 +19683,10 @@ var Form = function (_React$Component) {
     }, {
         key: 'getResults',
         value: function getResults(nameOne, nameTwo, food, cuisine, diet, winePairing, email) {
-            //
-            var entreeID = void 0;
+            // variables??
 
             _apiClient2.default.getEntreeBy(cuisine, diet).then(function (res) {
-                console.log(res.id);
+                console.log(res);
                 return res;
             }).then(function (entreeThing) {});
             // ERROR: cannot read property then of undefined
@@ -19774,18 +19773,6 @@ var Form = function (_React$Component) {
                                 'small',
                                 { className: 'form-text text-muted' },
                                 'Italian, thai, chinese, etc.'
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'form-check' },
-                            _react2.default.createElement('input', { type: 'checkbox', className: 'form-check-input', onClick: function onClick() {
-                                    return _this2.changeWinePairingBool();
-                                }, 'data-size': 'normal', 'data-toggle': 'toggle', name: 'winePairing' }),
-                            _react2.default.createElement(
-                                'label',
-                                null,
-                                'Wine pairing?'
                             )
                         ),
                         _react2.default.createElement(

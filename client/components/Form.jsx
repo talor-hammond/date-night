@@ -13,8 +13,8 @@ class Form extends React.Component {
             food: '',
             cuisine: '',
             diet: '',
-            winePairing: false,
-            email: ''
+            email: '',
+            results: {}
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -41,16 +41,15 @@ class Form extends React.Component {
     }
 
     getResults(nameOne, nameTwo, food, cuisine, diet, winePairing, email) {
-        //
-        let entreeID
+        // variables??
         
         api.getEntreeBy(cuisine, diet)
             .then(res => {
-                console.log(res.id)
+                console.log(res)
                 return res
             })
             .then((entreeThing) => {
-                
+
             })
         // ERROR: cannot read property then of undefined
 
@@ -89,11 +88,6 @@ class Form extends React.Component {
                             <label>Cuisine:</label>
                             <input type="text" name="cuisine" className="form-control" onChange={(e) => this.handleChange(e)} />
                             <small className="form-text text-muted">Italian, thai, chinese, etc.</small>
-                        </div>
-
-                        <div className="form-check">
-                            <input type="checkbox" className="form-check-input" onClick={() => this.changeWinePairingBool()} data-size="normal" data-toggle="toggle" name="winePairing" />
-                            <label>Wine pairing?</label>
                         </div>
 
                         <div className="form-group">
