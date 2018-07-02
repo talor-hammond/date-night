@@ -12,12 +12,14 @@ class Form extends React.Component {
             nameTwo: '',
             food: '',
             cuisine: '',
+            diet: '',
             winePairing: false,
             email: ''
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.changeWinePairingBool = this.changeWinePairingBool.bind(this)
+        this.submitButton = this.submitButton.bind(this)
         this.getResults = this.getResults.bind(this)
     }
 
@@ -31,19 +33,33 @@ class Form extends React.Component {
         this.state.winePairing = !this.state.winePairing
     }
 
-    getResults(nameOne, nameTwo, food, cuisine, winePairing, email) {
+    submitButton(e) {
+        e.preventDefault()
 
-        console.log(this.state)
-
-        
-
+        this.getResults(this.state.nameOne, this.state.nameTwo, this.state.food, this.state.cuisine, this.state.diet, this.state.winePairing, this.state.email)
+        // NOTE: can't I pass the object this.state???????
     }
 
-    submitButton(e) {
+    getResults(nameOne, nameTwo, food, cuisine, diet, winePairing, email) {
+        //
+        let entreeID
+        
+        api.getEntreeBy(cuisine, diet)
+            .then(res => {
+                console.log(res.id)
+                return res
+            })
+            .then((entreeThing) => {
+                
+            })
+        // ERROR: cannot read property then of undefined
 
-        console.log(this.state)
+        api.getMainBy(food, cuisine, diet)
+            .then(res => {
+                console.log(res)
+            })
 
-        e.preventDefault()
+        const entreeRecipe = api.getRecipeBy(entreeId)
 
     }
 

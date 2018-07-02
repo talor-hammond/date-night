@@ -11,10 +11,12 @@ function getEntreeBy(cuisine, diet) {
   // getting array of entrees...
 
   if (diet) {
-    request
+    return request
       .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?cuisine=${cuisine}&diet=${diet}&limitLicense=false&type=appetizer&minCalories=500&offset=0&number=100`)
       .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
-      .end((err, res) => {
+      .then((res) => {
+        console.log('Request is working...')
+
         let results = (res.body.results)
         let entree = results[Math.floor(Math.random() * results.length)]
 
@@ -27,18 +29,26 @@ function getEntreeBy(cuisine, diet) {
         return entreeResults // returning; setting up for use with .then
       })
   } else {
-    request
+    return request
       .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?cuisine=${cuisine}&limitLicense=false&type=appetizer&minCalories=500&offset=0&number=100`)
       .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
-      .end((err, res) => {
+      .then((res) => {
         let results = (res.body.results)
+
+        console.log(results)
+
         let entree = results[Math.floor(Math.random() * results.length)]
+
+        console.log(entree)
 
         // assigning the title and id of the entree to an object which we can return for reference:
         let entreeResults = {
           title: entree.title,
           id: entree.id
         }
+
+        console.log(entreeResults);
+        
 
         return entreeResults // returning; setting up for use with .then
       })
@@ -50,12 +60,15 @@ function getMainBy(food, cuisine, diet) {
 
   // if a diet was specified:
   if (diet) {
-    request
+    return request
       .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=${food}&cuisine=${cuisine}&diet=${diet}&limitLicense=false&type=main+course&minCalories=700&offset=0&number=100`)
       .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
-      .end((err, res) => {
+      .then((res) => {
 
+        console.log('Request is working...')
+        
         let results = res.body.results
+        
 
         // getting main at a random index between 0 and 99:
         let main = results[Math.floor(Math.random() * results.length)]
@@ -70,20 +83,29 @@ function getMainBy(food, cuisine, diet) {
       });
       
   } else {
-    request
+    return request
       .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=${food}&cuisine=${cuisine}&limitLicense=false&type=main+course&minCalories=700&offset=0&number=100`)
       .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
-      .end((err, res) => {
+      .then((res) => {
+
+        console.log(res)
+
         let results = res.body.results
+
+        console.log(results)
 
         // getting main at a random index between 0 and 99:
         let main = results[Math.floor(Math.random() * results.length)]
+
+        console.log(main)
 
         // assigning the title and id of the main to an object which we can return for reference:
         let mainResults = {
           title: main.title,
           id: main.id
         }
+
+        console.log(mainResults)
 
         return mainResults // returning; setting up for use with .then
       });
@@ -95,7 +117,7 @@ function getDessertBy(food) {
   request
     .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=${food}&limitLicense=false&type=dessert&ranking=2&offset=0&number=100`)
     .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost })
-    .end((err, res) => {
+    .then((res) => {
       console.log(res.body);
     });
 
@@ -106,7 +128,7 @@ function getWinePairingWith(food) {
   request
     .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/wine/pairing?food=${food}`)
     .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost })
-    .end((err, res) => {
+    .then((res) => {
       console.log(res.body);
     });
 
@@ -118,13 +140,13 @@ function getRecipeBy(id) {
   request
     .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${id}/information`)
     .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost })
-    .end((err, res) => {
+    .then((res) => {
       console.log(res.body);
     });
 
 }
 
-module.exports = {
+export default {
   getEntreeBy,
   getMainBy,
   getDessertBy,

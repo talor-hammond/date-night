@@ -12,3 +12,6 @@ Building a three-course menu & wine-pairing with a few queries + other stuff goi
 * Program
     * [Passing props to components in routes] <https://github.com/ReactTraining/react-router/issues/4105>
 
+* Superagent
+    <https://visionmedia.github.io/superagent/>
+
