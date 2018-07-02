@@ -8,12 +8,6 @@ class Form extends React.Component {
         super(props)
 
         this.state = {
-            nameOne: '',
-            nameTwo: '',
-            food: '',
-            cuisine: '',
-            diet: '',
-            email: '',
             menu: {},
             recipes: []
         }
@@ -47,12 +41,11 @@ class Form extends React.Component {
     getResults(nameOne, nameTwo, food, cuisine, diet, email) {
         // TODO: params -> object????
 
-        let menu = { // re-assign as each api method returns what u want
+        this.state.menu = { // re-assign as each api method returns what u want
             nameOne,
             nameTwo,
             email
         }
-
 
         // TODO: promise.all on these three!
         Promise.all([api.getEntreeBy(cuisine, diet), api.getMainBy(food, cuisine, diet), api.getDessert()])
@@ -62,11 +55,11 @@ class Form extends React.Component {
                 let main = returns[1]
                 let dessert = returns[2]
 
-                // building menu...
-                menu.entree = entree.title
-                menu.main = main.title
-                menu.dessert = dessert.title
-                
+                // building menu in state...
+                this.state.menu.entree = entree.title
+                this.state.menu.main = main.title
+                this.state.menu.dessert = dessert.title
+
                 // setting a recipeIds array...
                 let recipeIds = []
 
@@ -75,9 +68,16 @@ class Form extends React.Component {
                     recipeIds.push(item.id)
                 })
 
-                console.log('Menu: ', menu)
-                console.log('-----------------------')
-                console.log('Recipe ids: ', recipeIds)
+                return recipeIds
+            })
+            .then(recipeIds => { // w the recipeIds that are returned prev...
+                recipeIds.map((id) => { // NOTE: tell this to wait for all the Ids to be pushed
+                    api.getRecipeBy(id)
+                        .then(recipe => {
+                            this.state.recipes.push(recipe) // pushing each recipe object into our recipes array
+                        })
+                })
+                console.log(this.state)
             })
 
         // api.getEntreeBy(cuisine, diet)

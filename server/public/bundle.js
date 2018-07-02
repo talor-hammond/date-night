@@ -19645,12 +19645,6 @@ var Form = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
 
         _this.state = {
-            nameOne: '',
-            nameTwo: '',
-            food: '',
-            cuisine: '',
-            diet: '',
-            email: '',
             menu: {},
             recipes: []
         };
@@ -19689,9 +19683,11 @@ var Form = function (_React$Component) {
     }, {
         key: 'getResults',
         value: function getResults(nameOne, nameTwo, food, cuisine, diet, email) {
+            var _this2 = this;
+
             // TODO: params -> object????
 
-            var menu = { // re-assign as each api method returns what u want
+            this.state.menu = { // re-assign as each api method returns what u want
                 nameOne: nameOne,
                 nameTwo: nameTwo,
                 email: email
@@ -19703,10 +19699,10 @@ var Form = function (_React$Component) {
                 var main = returns[1];
                 var dessert = returns[2];
 
-                // building menu...
-                menu.entree = entree.title;
-                menu.main = main.title;
-                menu.dessert = dessert.title;
+                // building menu in state...
+                _this2.state.menu.entree = entree.title;
+                _this2.state.menu.main = main.title;
+                _this2.state.menu.dessert = dessert.title;
 
                 // setting a recipeIds array...
                 var recipeIds = [];
@@ -19716,9 +19712,16 @@ var Form = function (_React$Component) {
                     recipeIds.push(item.id);
                 });
 
-                console.log('Menu: ', menu);
-                console.log('-----------------------');
-                console.log('Recipe ids: ', recipeIds);
+                return recipeIds;
+            }).then(function (recipeIds) {
+                // w the recipeIds that are returned prev...
+                recipeIds.map(function (id) {
+                    // NOTE: tell this to wait for all the Ids to be pushed
+                    _apiClient2.default.getRecipeBy(id).then(function (recipe) {
+                        _this2.state.recipes.push(recipe); // pushing each recipe object into our recipes array
+                    });
+                });
+                console.log(_this2.state);
             });
 
             // api.getEntreeBy(cuisine, diet)
@@ -19763,7 +19766,7 @@ var Form = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
             return _react2.default.createElement(
                 _react2.default.Fragment,
@@ -19786,7 +19789,7 @@ var Form = function (_React$Component) {
                                 'div',
                                 { className: 'col' },
                                 _react2.default.createElement('input', { type: 'text', name: 'nameOne', className: 'form-control', onChange: function onChange(e) {
-                                        return _this2.handleChange(e);
+                                        return _this3.handleChange(e);
                                     } })
                             ),
                             _react2.default.createElement(
@@ -19798,7 +19801,7 @@ var Form = function (_React$Component) {
                                 'div',
                                 { className: 'col' },
                                 _react2.default.createElement('input', { type: 'text', name: 'nameTwo', className: 'form-control', onChange: function onChange(e) {
-                                        return _this2.handleChange(e);
+                                        return _this3.handleChange(e);
                                     } })
                             )
                         ),
@@ -19816,7 +19819,7 @@ var Form = function (_React$Component) {
                                 'Food:'
                             ),
                             _react2.default.createElement('input', { type: 'text', name: 'food', className: 'form-control', onChange: function onChange(e) {
-                                    return _this2.handleChange(e);
+                                    return _this3.handleChange(e);
                                 } }),
                             _react2.default.createElement(
                                 'small',
@@ -19830,7 +19833,7 @@ var Form = function (_React$Component) {
                                 'Cuisine:'
                             ),
                             _react2.default.createElement('input', { type: 'text', name: 'cuisine', className: 'form-control', onChange: function onChange(e) {
-                                    return _this2.handleChange(e);
+                                    return _this3.handleChange(e);
                                 } }),
                             _react2.default.createElement(
                                 'small',
@@ -19847,13 +19850,13 @@ var Form = function (_React$Component) {
                                 'An email address to send the menu & recipes to:'
                             ),
                             _react2.default.createElement('input', { type: 'email', className: 'form-control', onChange: function onChange(e) {
-                                    return _this2.handleChange(e);
+                                    return _this3.handleChange(e);
                                 }, name: 'email' })
                         ),
                         _react2.default.createElement(
                             'button',
                             { type: 'submit', onClick: function onClick(e) {
-                                    return _this2.submitButton(e);
+                                    return _this3.submitButton(e);
                                 }, className: 'btn btn-primary' },
                             'Submit'
                         )
