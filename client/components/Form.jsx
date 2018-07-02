@@ -24,10 +24,9 @@ class Form extends React.Component {
         this.getResults = this.getResults.bind(this)
     }
 
-    componentDidMount() {
-        // api.getWinePairingWith('steak')
-    }
+    // componentDidMount() {
 
+    // }
 
     handleChange(e) {
         const inputs = this.state
@@ -48,43 +47,51 @@ class Form extends React.Component {
     getResults(nameOne, nameTwo, food, cuisine, diet, email) {
         // TODO: params -> object????
 
-        // variables??
-        let menu = {
+        let menu = { // re-assign as each api method returns what u want
             nameOne,
             nameTwo,
             email
-        } // re-assign as each api method returns what u want
+        }
+
         let recipeIds = []
 
         api.getEntreeBy(cuisine, diet)
             .then(entree => {
-                console.log(entree)
                 menu.entree = entree.title
-                console.log(menu)
+                recipeIds.push(entree.id)
+
+                console.log(menu, recipeIds)
             })
-        // ERROR: cannot read property then of undefined
 
         api.getMainBy(food, cuisine, diet)
             .then(main => {
-                console.log(main)
                 menu.main = main.title
-                // call get recipe by ID and add return value to recipes
-                console.log(menu)
+                recipeIds.push(menu.id)
+
+                console.log(menu, recipeIds)
             })
 
         api.getDessert()
             .then(dessert => {
-                console.log(dessert)
                 menu.dessert = dessert.title
-                console.log(menu)
+                recipeIds.push(dessert.id)
+                console.log(menu, recipeIds)
             })
 
         api.getWinePairingWith(food)
             .then(wine => {
-                console.log(wine)
                 menu.wine = wine
                 console.log(menu)
             })
+
+        // mapping through the ids, and performing a request and returning the recipe object for each one:
+        recipesIds.map(id => {
+            api.getRecipesBy(id)
+                .then(recipe => {
+                    this.state.recipes.push(recipe) // pushing each recipe object into our recipes array
+                    console.log(this.state.recipes)
+                })
+        })
 
     }
 

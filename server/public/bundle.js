@@ -19662,12 +19662,11 @@ var Form = function (_React$Component) {
         return _this;
     }
 
+    // componentDidMount() {
+
+    // }
+
     _createClass(Form, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            // api.getWinePairingWith('steak')
-        }
-    }, {
         key: 'handleChange',
         value: function handleChange(e) {
             var inputs = this.state;
@@ -19689,45 +19688,55 @@ var Form = function (_React$Component) {
     }, {
         key: 'getResults',
         value: function getResults(nameOne, nameTwo, food, cuisine, diet, email) {
+            var _this2 = this;
+
             // TODO: params -> object????
 
-            // variables??
-            var menu = {
+            var menu = { // re-assign as each api method returns what u want
                 nameOne: nameOne,
                 nameTwo: nameTwo,
-                email: email // re-assign as each api method returns what u want
-            };var recipeIds = [];
+                email: email
+            };
+
+            var recipeIds = [];
 
             _apiClient2.default.getEntreeBy(cuisine, diet).then(function (entree) {
-                console.log(entree);
                 menu.entree = entree.title;
-                console.log(menu);
+                recipeIds.push(entree.id);
+
+                console.log(menu, recipeIds);
             });
-            // ERROR: cannot read property then of undefined
 
             _apiClient2.default.getMainBy(food, cuisine, diet).then(function (main) {
-                console.log(main);
                 menu.main = main.title;
-                // call get recipe by ID and add return value to recipes
-                console.log(menu);
+                recipeIds.push(menu.id);
+
+                console.log(menu, recipeIds);
             });
 
             _apiClient2.default.getDessert().then(function (dessert) {
-                console.log(dessert);
                 menu.dessert = dessert.title;
-                console.log(menu);
+                recipeIds.push(dessert.id);
+                console.log(menu, recipeIds);
             });
 
             _apiClient2.default.getWinePairingWith(food).then(function (wine) {
-                console.log(wine);
                 menu.wine = wine;
                 console.log(menu);
+            });
+
+            // mapping through the ids, and performing a request and returning the recipe object for each one:
+            recipesIds.map(function (id) {
+                _apiClient2.default.getRecipesBy(id).then(function (recipe) {
+                    _this2.state.recipes.push(recipe); // pushing each recipe object into our recipes array
+                    console.log(_this2.state.recipes);
+                });
             });
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
             return _react2.default.createElement(
                 _react2.default.Fragment,
@@ -19750,7 +19759,7 @@ var Form = function (_React$Component) {
                                 'div',
                                 { className: 'col' },
                                 _react2.default.createElement('input', { type: 'text', name: 'nameOne', className: 'form-control', onChange: function onChange(e) {
-                                        return _this2.handleChange(e);
+                                        return _this3.handleChange(e);
                                     } })
                             ),
                             _react2.default.createElement(
@@ -19762,7 +19771,7 @@ var Form = function (_React$Component) {
                                 'div',
                                 { className: 'col' },
                                 _react2.default.createElement('input', { type: 'text', name: 'nameTwo', className: 'form-control', onChange: function onChange(e) {
-                                        return _this2.handleChange(e);
+                                        return _this3.handleChange(e);
                                     } })
                             )
                         ),
@@ -19780,7 +19789,7 @@ var Form = function (_React$Component) {
                                 'Food:'
                             ),
                             _react2.default.createElement('input', { type: 'text', name: 'food', className: 'form-control', onChange: function onChange(e) {
-                                    return _this2.handleChange(e);
+                                    return _this3.handleChange(e);
                                 } }),
                             _react2.default.createElement(
                                 'small',
@@ -19794,7 +19803,7 @@ var Form = function (_React$Component) {
                                 'Cuisine:'
                             ),
                             _react2.default.createElement('input', { type: 'text', name: 'cuisine', className: 'form-control', onChange: function onChange(e) {
-                                    return _this2.handleChange(e);
+                                    return _this3.handleChange(e);
                                 } }),
                             _react2.default.createElement(
                                 'small',
@@ -19811,13 +19820,13 @@ var Form = function (_React$Component) {
                                 'An email address to send the menu & recipes to:'
                             ),
                             _react2.default.createElement('input', { type: 'email', className: 'form-control', onChange: function onChange(e) {
-                                    return _this2.handleChange(e);
+                                    return _this3.handleChange(e);
                                 }, name: 'email' })
                         ),
                         _react2.default.createElement(
                             'button',
                             { type: 'submit', onClick: function onClick(e) {
-                                    return _this2.submitButton(e);
+                                    return _this3.submitButton(e);
                                 }, className: 'btn btn-primary' },
                             'Submit'
                         )
@@ -19942,8 +19951,6 @@ function getDessert() {
       id: dessert.id
     };
 
-    console.log(dessertResults);
-
     return dessertResults;
   });
 }
@@ -19952,33 +19959,45 @@ function getWinePairingWith(food) {
 
   return _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/wine/pairing?food=" + food).set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }).then(function (res) {
     var wines = res.body.pairedWines;
-    console.log(wines);
 
     var wine = wines[Math.floor(Math.random() * wines.length)];
 
-    console.log(wine);
     return wine;
   });
 }
 
 // Recipe information:
-// function getRecipeBy(id) {
+function getRecipeBy(id) {
 
-//   request
-//     .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${id}/information`)
-//     .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost })
-//     .then((res) => {
-//       console.log(res.body);
-//     });
+  return _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + id + "/information").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }).then(function (res) {
+    var results = res.body;
 
-// }
+    var ingredientResults = results.extendedIngredients; // grabbing our ingredientResults from results
+    var ingredients = []; // prefacing our ingredients array
+
+    ingredientResults.map(function (ingredient) {
+      // for each ingredient in ingredientResults, grab the name prop...
+      ingredients.push(ingredient.name);
+    });
+
+    var instructions = results.instructions; // defining our recipe instructions...
+
+    var recipe = {
+      title: results.title,
+      ingredients: ingredients,
+      instructions: instructions
+    };
+
+    return recipe;
+  });
+}
 
 exports.default = {
   getEntreeBy: getEntreeBy,
   getMainBy: getMainBy,
   getDessert: getDessert,
-  getWinePairingWith: getWinePairingWith
-  // getRecipeBy
+  getWinePairingWith: getWinePairingWith,
+  getRecipeBy: getRecipeBy
 };
 
 /***/ }),

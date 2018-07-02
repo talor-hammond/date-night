@@ -55,9 +55,9 @@ function getMainBy(food, cuisine, diet) {
       .then((res) => {
 
         console.log('Request is working...')
-        
+
         let mains = res.body.results
-        
+
         // getting main at a random index between 0 and 99:
         let main = mains[Math.floor(Math.random() * mains.length)]
 
@@ -69,7 +69,7 @@ function getMainBy(food, cuisine, diet) {
 
         return mainResults // returning; setting up for use with .then
       });
-      
+
   } else {
     return request
       .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=${food}&cuisine=${cuisine}&limitLicense=false&type=main+course&minCalories=700&offset=0&number=100`)
@@ -106,8 +106,6 @@ function getDessert() {
         id: dessert.id
       }
 
-      console.log(dessertResults)
-
       return dessertResults
     });
 
@@ -120,32 +118,47 @@ function getWinePairingWith(food) {
     .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost })
     .then((res) => {
       let wines = res.body.pairedWines
-      console.log(wines)
 
       let wine = wines[Math.floor(Math.random() * wines.length)]
-      
-      console.log(wine)
+
       return wine
     });
 
 }
 
 // Recipe information:
-// function getRecipeBy(id) {
+function getRecipeBy(id) {
 
-//   request
-//     .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${id}/information`)
-//     .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost })
-//     .then((res) => {
-//       console.log(res.body);
-//     });
+    return request
+      .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${id}/information`)
+      .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost })
+      .then((res) => {
+        const results = res.body
 
-// }
+        const ingredientResults = results.extendedIngredients // grabbing our ingredientResults from results
+        let ingredients = [] // prefacing our ingredients array
+
+        ingredientResults.map(ingredient => { // for each ingredient in ingredientResults, grab the name prop...
+          ingredients.push(ingredient.name)
+        })
+
+        const instructions = results.instructions // defining our recipe instructions...
+
+        const recipe = {
+          title: results.title,
+          ingredients,
+          instructions
+        }
+
+        return recipe
+      })
+
+}
 
 export default {
   getEntreeBy,
   getMainBy,
   getDessert,
-  getWinePairingWith
-  // getRecipeBy
+  getWinePairingWith,
+  getRecipeBy
 }
