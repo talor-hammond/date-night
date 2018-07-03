@@ -16,5 +16,6 @@ Building a three-course menu & wine-pairing with a few queries + other stuff goi
             * **Array destructuring**: used array destructuring to assign variable to each index in the array, without having to do multiple declarations
 
 * *PDFKit*
+    * [Docs] <http://pdfkit.org/>
     * [Create PDF Document w NodeJS] <https://www.youtube.com/watch?v=iRDWxqcXYxE>
     * [Create PDF in File System using Node] <https://www.youtube.com/watch?v=q4wBJxZf3Os>

@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {Component} from 'react'
 
 import api from '../apiClient'
 
-class Form extends React.Component {
+class Form extends Component {
 
     constructor(props) {
         super(props)

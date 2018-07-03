@@ -1,21 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import Nav from './Nav'
 
-class Results extends React.Component {
+class Results extends Component {
 
     constructor(props) {
         super(props)
 
         // TODO: structuring???? from App.jsx w spread operator
-
-        this.state = {
-            nameOne: this.props.menu.nameOne,
-            nameTwo: this.props.menu.nameTwo,
-            entree: this.props.menu.entree,
-            main: this.props.menu.main,
-            dessert: this.props.menu.dessert
-        }
     }
 
     componentDidMount() {
@@ -23,6 +15,8 @@ class Results extends React.Component {
     }
 
     render() {
+        const {menu, recipes} = this.props
+        const {entree, main, dessert, wine} = menu
         return (
             <React.Fragment>
                 <Nav />
@@ -33,20 +27,22 @@ class Results extends React.Component {
                     <ul>
                         <li>
                             <h3 className="menuTitle">Entreé</h3>
-                            <p><small>chawcalasfdsafkn with yasdafjds on toast</small></p>
+                            <p><small>{entree}</small></p>
                         </li>
                         <li>
                             <h3 className="menuTitle">Main</h3>
-                            <p><small>chawcalasfdsafkn with yasdafjds on toast</small></p>
+                            <p><small>{main}</small></p>
                         </li>
                         <li>
                             <h3 className="menuTitle">Dessert</h3>
-                            <p><small>chawcalasfdsafkn with yasdafjds on toast</small></p>
+                            <p><small>{dessert}</small></p>
                         </li>
-                        <li>
-                            <h3 className="menuTitle">Wine pairing</h3>
-                            <p><small>chawcalasfdsafkn with yasdafjds on toast</small></p>
-                        </li>
+                        {wine && (
+                            <li>
+                                <h3 className="menuTitle">Wine pairing</h3>
+                                <p><small>{wine}</small></p>
+                            </li>
+                        )}
                     </ul>
 
                 </div>

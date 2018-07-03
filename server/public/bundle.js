@@ -19526,8 +19526,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // Components:
 
 
-var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+var App = function (_Component) {
+  _inherits(App, _Component);
 
   function App(props) {
     _classCallCheck(this, App);
@@ -19539,45 +19539,44 @@ var App = function (_React$Component) {
       submitted: false
     };
 
-    _this.updateState = _this.updateState.bind(_this);
     _this.goBack = _this.goBack.bind(_this);
     return _this;
   }
 
   _createClass(App, [{
     key: 'updateState',
-    value: function updateState(state) {
-      this.state.submitted = true;
-
-      // assigning the state passed in to results
-      var results = state;
-
+    value: function updateState(results) {
       // setting this.state.results and re-rendering...
       this.setState({
-        results: results
+        results: results,
+        submitted: true
       });
-
-      console.log(this.state.results);
     }
   }, {
     key: 'goBack',
     value: function goBack() {
-      this.state.submitted = false;
+      this.setState({
+        submitted: false
+      });
     }
   }, {
     key: 'render',
     value: function render() {
+      var _state = this.state,
+          submitted = _state.submitted,
+          updateState = _state.updateState,
+          results = _state.results;
+
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
-        this.state.submitted && _react2.default.createElement(_Home2.default, { updateState: this.updateState }),
-        !this.state.submitted && _react2.default.createElement(_Results2.default, this.state.results)
+        !submitted ? _react2.default.createElement(_Home2.default, { updateState: this.updateState.bind(this) }) : _react2.default.createElement(_Results2.default, results)
       );
     }
   }]);
 
   return App;
-}(_react2.default.Component);
+}(_react.Component);
 
 exports.default = App;
 
@@ -19706,8 +19705,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Form = function (_React$Component) {
-    _inherits(Form, _React$Component);
+var Form = function (_Component) {
+    _inherits(Form, _Component);
 
     function Form(props) {
         _classCallCheck(this, Form);
@@ -19893,7 +19892,7 @@ var Form = function (_React$Component) {
     }]);
 
     return Form;
-}(_react2.default.Component);
+}(_react.Component);
 
 exports.default = Form;
 
@@ -22124,24 +22123,15 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Results = function (_React$Component) {
-    _inherits(Results, _React$Component);
+var Results = function (_Component) {
+    _inherits(Results, _Component);
 
     function Results(props) {
         _classCallCheck(this, Results);
 
+        return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
+
         // TODO: structuring???? from App.jsx w spread operator
-
-        var _this = _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
-
-        _this.state = {
-            nameOne: _this.props.menu.nameOne,
-            nameTwo: _this.props.menu.nameTwo,
-            entree: _this.props.menu.entree,
-            main: _this.props.menu.main,
-            dessert: _this.props.menu.dessert
-        };
-        return _this;
     }
 
     _createClass(Results, [{
@@ -22152,6 +22142,14 @@ var Results = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _props = this.props,
+                menu = _props.menu,
+                recipes = _props.recipes;
+            var entree = menu.entree,
+                main = menu.main,
+                dessert = menu.dessert,
+                wine = menu.wine;
+
             return _react2.default.createElement(
                 _react2.default.Fragment,
                 null,
@@ -22182,7 +22180,7 @@ var Results = function (_React$Component) {
                                 _react2.default.createElement(
                                     'small',
                                     null,
-                                    'chawcalasfdsafkn with yasdafjds on toast'
+                                    entree
                                 )
                             )
                         ),
@@ -22200,7 +22198,7 @@ var Results = function (_React$Component) {
                                 _react2.default.createElement(
                                     'small',
                                     null,
-                                    'chawcalasfdsafkn with yasdafjds on toast'
+                                    main
                                 )
                             )
                         ),
@@ -22218,11 +22216,11 @@ var Results = function (_React$Component) {
                                 _react2.default.createElement(
                                     'small',
                                     null,
-                                    'chawcalasfdsafkn with yasdafjds on toast'
+                                    dessert
                                 )
                             )
                         ),
-                        _react2.default.createElement(
+                        wine && _react2.default.createElement(
                             'li',
                             null,
                             _react2.default.createElement(
@@ -22236,7 +22234,7 @@ var Results = function (_React$Component) {
                                 _react2.default.createElement(
                                     'small',
                                     null,
-                                    'chawcalasfdsafkn with yasdafjds on toast'
+                                    wine
                                 )
                             )
                         )
@@ -22247,7 +22245,7 @@ var Results = function (_React$Component) {
     }]);
 
     return Results;
-}(_react2.default.Component);
+}(_react.Component);
 
 exports.default = Results;
 
