@@ -19548,6 +19548,10 @@ var App = function (_Component) {
           ingredients: ['alfredo sauce', "chicken strips", "deli ham", "pasta", "swiss cheese"],
           instructions: "Bake the frozen chicken you chose according to the package directions on the back.Boil the noodles according to the package directions for the type you chose. When cooked, drain out all the water.When the chicken is cooked, slice into smaller pieces.Add the chicken to the noodles. Pour the jar of alfredo sauce over the chicken and noodles. Stir to mix it all up. Add the ham to the mixture. Make sure you break up the pieces of ham from each other, they like to stick together.Add the shredded cheese, mix together.Serve piping hot.",
           title: "Chicken Cordon Bleu Pasta"
+        }, {
+          ingredients: ['alfredo sauce', "chicken strips", "deli ham", "pasta", "swiss cheese"],
+          instructions: "Bake the frozen chicken you chose according to the package directions on the back.Boil the noodles according to the package directions for the type you chose. When cooked, drain out all the water.When the chicken is cooked, slice into smaller pieces.Add the chicken to the noodles. Pour the jar of alfredo sauce over the chicken and noodles. Stir to mix it all up. Add the ham to the mixture. Make sure you break up the pieces of ham from each other, they like to stick together.Add the shredded cheese, mix together.Serve piping hot.",
+          title: "Chicken Cordon Bleu Pasta"
         }]
       },
       submitted: true
@@ -22144,8 +22148,6 @@ var Results = function (_Component) {
         _classCallCheck(this, Results);
 
         return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
-
-        // TODO: structuring???? from App.jsx w spread operator
     }
 
     _createClass(Results, [{
@@ -22163,6 +22165,7 @@ var Results = function (_Component) {
                 main = menu.main,
                 dessert = menu.dessert,
                 wine = menu.wine;
+
 
             return _react2.default.createElement(
                 _react2.default.Fragment,
@@ -22253,6 +22256,76 @@ var Results = function (_Component) {
                             )
                         )
                     )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'recipesContainer' },
+                    _react2.default.createElement(
+                        'h1',
+                        { className: 'menuTitle' },
+                        'Recipes'
+                    ),
+                    _react2.default.createElement('hr', null),
+                    recipes.map(function (recipe, i) {
+                        return _react2.default.createElement(
+                            _react2.default.Fragment,
+                            { key: i },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'row' },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col' },
+                                    _react2.default.createElement(
+                                        'h4',
+                                        { className: 'fancy' },
+                                        recipe.title
+                                    )
+                                )
+                            ),
+                            _react2.default.createElement('br', null),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'row' },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col-3' },
+                                    _react2.default.createElement(
+                                        'h5',
+                                        { className: 'fancy' },
+                                        'Ingredients:'
+                                    ),
+                                    _react2.default.createElement(
+                                        'ul',
+                                        null,
+                                        recipe.ingredients.map(function (ingredient, i) {
+                                            return _react2.default.createElement(
+                                                'li',
+                                                { key: i, className: 'text-capitalize' },
+                                                ingredient
+                                            );
+                                        })
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'col-9' },
+                                    _react2.default.createElement(
+                                        'h5',
+                                        { className: 'fancy' },
+                                        'Instructions:'
+                                    ),
+                                    _react2.default.createElement(
+                                        'p',
+                                        null,
+                                        recipe.instructions
+                                    )
+                                )
+                            ),
+                            _react2.default.createElement('br', null),
+                            _react2.default.createElement('br', null)
+                        );
+                    })
                 )
             );
         }

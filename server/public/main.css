@@ -69,19 +69,18 @@ small.form-text.text-muted {
     height: 90vh;
 }
 
-h1.menuTitle, h3.menuTitle {
+.container ul {
+    list-style-type: none;
+}
+
+h1.menuTitle, h3.menuTitle, .fancy {
     font-family: 'Pacifico', cursive;
 }
 
-ul {
-    list-style-type: none;
-    text-align: center;
+.row ul {
     display: block;
     padding: 0;
-}
-
-ul li {
-    margin-bottom: 40px;
+    margin-left: 26px;
 }
 
 /* Fix classes */
@@ -93,10 +92,11 @@ ul li {
     width: 50%;
 }
 
-.menu hr, .recipes hr {
-    background-color: white;
+.recipesContainer {
+    width: 80%;
+    margin: 0 auto;
 }
 
-.container.recipes {
-    width: 80%;
+.menu hr, .recipesContainer hr {
+    background-color: white;
 }
