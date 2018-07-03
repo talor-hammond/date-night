@@ -19692,6 +19692,8 @@ var _apiClient2 = _interopRequireDefault(_apiClient);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -19802,62 +19804,48 @@ var Form = function (_React$Component) {
                     'div',
                     { className: 'container' },
                     _react2.default.createElement(
+                        'h5',
+                        null,
+                        'Building a menu for...'
+                    ),
+                    _react2.default.createElement(
                         'form',
                         null,
-                        _react2.default.createElement(
-                            'h1',
-                            null,
-                            'Who\'s going?'
-                        ),
                         _react2.default.createElement(
                             'div',
                             { className: 'form-row' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'col' },
+                                { className: 'col-md-5' },
                                 _react2.default.createElement('input', { type: 'text', name: 'nameOne', className: 'form-control', onChange: function onChange(e) {
                                         return _this3.handleChange(e);
                                     } })
                             ),
                             _react2.default.createElement(
-                                'small',
-                                { className: 'form-text text-muted' },
-                                '&'
+                                'div',
+                                { className: 'col parentAndText' },
+                                _react2.default.createElement(
+                                    'p',
+                                    { className: 'andText' },
+                                    'and...'
+                                )
                             ),
                             _react2.default.createElement(
                                 'div',
-                                { className: 'col' },
+                                { className: 'col-md-5' },
                                 _react2.default.createElement('input', { type: 'text', name: 'nameTwo', className: 'form-control', onChange: function onChange(e) {
                                         return _this3.handleChange(e);
                                     } })
                             )
                         ),
+                        _react2.default.createElement('br', null),
                         _react2.default.createElement(
                             'div',
                             { className: 'form-group' },
                             _react2.default.createElement(
-                                'h1',
-                                null,
-                                'What do you feel like?'
-                            ),
-                            _react2.default.createElement(
                                 'label',
                                 null,
-                                'Food:'
-                            ),
-                            _react2.default.createElement('input', { type: 'text', name: 'food', className: 'form-control', onChange: function onChange(e) {
-                                    return _this3.handleChange(e);
-                                } }),
-                            _react2.default.createElement(
-                                'small',
-                                { className: 'form-text text-muted' },
-                                'Pasta, curry, mulch, etc.'
-                            ),
-                            _react2.default.createElement('br', null),
-                            _react2.default.createElement(
-                                'label',
-                                null,
-                                'Cuisine:'
+                                'What cuisine?'
                             ),
                             _react2.default.createElement('input', { type: 'text', name: 'cuisine', className: 'form-control', onChange: function onChange(e) {
                                     return _this3.handleChange(e);
@@ -19866,14 +19854,31 @@ var Form = function (_React$Component) {
                                 'small',
                                 { className: 'form-text text-muted' },
                                 'Italian, thai, chinese, etc.'
+                            ),
+                            _react2.default.createElement(
+                                'label',
+                                null,
+                                'Any particular food?'
+                            ),
+                            _react2.default.createElement('input', { type: 'text', name: 'food', className: 'form-control', onChange: function onChange(e) {
+                                    return _this3.handleChange(e);
+                                } }),
+                            _react2.default.createElement(
+                                'small',
+                                { className: 'form-text text-muted' },
+                                'Pasta, curry, mulch, etc.'
                             )
                         ),
                         _react2.default.createElement(
-                            'button',
-                            { type: 'submit', onClick: function onClick(e) {
-                                    return _this3.submitButton(e);
-                                }, className: 'btn btn-primary' },
-                            'Submit'
+                            'div',
+                            { className: 'has-content-centered' },
+                            _react2.default.createElement(
+                                'button',
+                                _defineProperty({ className: 'submit', type: 'submit', onClick: function onClick(e) {
+                                        return _this3.submitButton(e);
+                                    } }, 'className', 'btn btn-primary'),
+                                'Submit'
+                            )
                         )
                     )
                 )

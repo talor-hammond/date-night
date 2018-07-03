@@ -87,37 +87,36 @@ class Form extends React.Component {
         return (
             <React.Fragment>
                 <div className="container">
+                    <h5>Building a menu for...</h5>
+
                     <form>
 
-                        <h1>Who's going?</h1>
                         <div className="form-row">
-                            <div className="col">
+                            <div className="col-md-5">
                                 <input type="text" name="nameOne" className="form-control" onChange={(e) => this.handleChange(e)} />
                             </div>
-                            <small className="form-text text-muted">&</small>
-                            <div className="col">
+                            <div className="col parentAndText">
+                                <p className="andText">and...</p>
+                            </div>
+                            <div className="col-md-5">
                                 <input type="text" name="nameTwo" className="form-control" onChange={(e) => this.handleChange(e)} />
                             </div>
                         </div>
 
+                        <br />
+
                         <div className="form-group">
-                            <h1>What do you feel like?</h1>
-                            <label>Food:</label>
-                            <input type="text" name="food" className="form-control" onChange={(e) => this.handleChange(e)} />
-                            <small className="form-text text-muted">Pasta, curry, mulch, etc.</small>
-                            <br />
-                            <label>Cuisine:</label>
+                            <label>What cuisine?</label>
                             <input type="text" name="cuisine" className="form-control" onChange={(e) => this.handleChange(e)} />
                             <small className="form-text text-muted">Italian, thai, chinese, etc.</small>
+                            <label>Any particular food?</label>
+                            <input type="text" name="food" className="form-control" onChange={(e) => this.handleChange(e)} />
+                            <small className="form-text text-muted">Pasta, curry, mulch, etc.</small>
                         </div>
 
-                        {/* <div className="form-group">
-                            <label>An email address to send the menu & recipes to:</label>
-                            <input type="email" className="form-control" onChange={(e) => this.handleChange(e)} name="email" />
-                        </div> */}
-
-                        <button type="submit" onClick={(e) => this.submitButton(e)} className="btn btn-primary">Submit</button>
-
+                        <div className="has-content-centered">
+                            <button className="submit" type="submit" onClick={(e) => this.submitButton(e)} className="btn btn-primary">Submit</button>
+                        </div>
                     </form>
                 </div>
             </React.Fragment>
