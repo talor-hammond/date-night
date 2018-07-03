@@ -22130,17 +22130,18 @@ var Results = function (_React$Component) {
     function Results(props) {
         _classCallCheck(this, Results);
 
-        return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
-
         // TODO: structuring???? from App.jsx w spread operator
 
-        // this.state = {
-        //     nameOne: this.props.menu.nameOne,
-        //     nameTwo: this.props.menu.nameTwo,
-        //     entree: this.props.menu.entree,
-        //     main: this.props.menu.main,
-        //     dessert: this.props.menu.dessert
-        // }
+        var _this = _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
+
+        _this.state = {
+            nameOne: _this.props.menu.nameOne,
+            nameTwo: _this.props.menu.nameTwo,
+            entree: _this.props.menu.entree,
+            main: _this.props.menu.main,
+            dessert: _this.props.menu.dessert
+        };
+        return _this;
     }
 
     _createClass(Results, [{

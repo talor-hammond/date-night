@@ -9,13 +9,13 @@ class Results extends React.Component {
 
         // TODO: structuring???? from App.jsx w spread operator
 
-        // this.state = {
-        //     nameOne: this.props.menu.nameOne,
-        //     nameTwo: this.props.menu.nameTwo,
-        //     entree: this.props.menu.entree,
-        //     main: this.props.menu.main,
-        //     dessert: this.props.menu.dessert
-        // }
+        this.state = {
+            nameOne: this.props.menu.nameOne,
+            nameTwo: this.props.menu.nameTwo,
+            entree: this.props.menu.entree,
+            main: this.props.menu.main,
+            dessert: this.props.menu.dessert
+        }
     }
 
     componentDidMount() {
