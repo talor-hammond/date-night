@@ -19,7 +19,15 @@ class App extends React.Component {
 
   updateState(state) {
     this.state.submitted = true
-    this.setState(state)
+
+    // assigning the state passed in to results
+    const results = state
+
+    // setting this.state.results and re-rendering...
+    this.setState({
+      results
+    })
+
     console.log(this.state.results)
   }
 
@@ -31,8 +39,8 @@ class App extends React.Component {
     return (
         <React.Fragment>
 
-          {!this.state.submitted && <Home updateState={this.updateState} />}
-          {this.state.submitted && <Results {...this.state.results} goBack={this.goBack} />}
+          {this.state.submitted && <Home updateState={this.updateState} />}
+          {!this.state.submitted && <Results {...this.state.results}/>}
 
         </React.Fragment>
     )

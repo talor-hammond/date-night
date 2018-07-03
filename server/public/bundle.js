@@ -19501,8 +19501,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(5);
@@ -19550,7 +19548,15 @@ var App = function (_React$Component) {
     key: 'updateState',
     value: function updateState(state) {
       this.state.submitted = true;
-      this.setState(state);
+
+      // assigning the state passed in to results
+      var results = state;
+
+      // setting this.state.results and re-rendering...
+      this.setState({
+        results: results
+      });
+
       console.log(this.state.results);
     }
   }, {
@@ -19564,8 +19570,8 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
-        !this.state.submitted && _react2.default.createElement(_Home2.default, { updateState: this.updateState }),
-        this.state.submitted && _react2.default.createElement(_Results2.default, _extends({}, this.state.results, { goBack: this.goBack }))
+        this.state.submitted && _react2.default.createElement(_Home2.default, { updateState: this.updateState }),
+        !this.state.submitted && _react2.default.createElement(_Results2.default, this.state.results)
       );
     }
   }]);
@@ -22125,17 +22131,117 @@ var Results = function (_React$Component) {
         _classCallCheck(this, Results);
 
         return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
+
+        // TODO: structuring???? from App.jsx w spread operator
+
+        // this.state = {
+        //     nameOne: this.props.menu.nameOne,
+        //     nameTwo: this.props.menu.nameTwo,
+        //     entree: this.props.menu.entree,
+        //     main: this.props.menu.main,
+        //     dessert: this.props.menu.dessert
+        // }
     }
 
     _createClass(Results, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            console.log(props);
+            console.log(this.props);
         }
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(_Nav2.default, null);
+            return _react2.default.createElement(
+                _react2.default.Fragment,
+                null,
+                _react2.default.createElement(_Nav2.default, null),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'container menu' },
+                    _react2.default.createElement(
+                        'h1',
+                        { className: 'menuTitle' },
+                        'Your menu'
+                    ),
+                    _react2.default.createElement('hr', null),
+                    _react2.default.createElement(
+                        'ul',
+                        null,
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'h3',
+                                { className: 'menuTitle' },
+                                'Entre\xE9'
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                _react2.default.createElement(
+                                    'small',
+                                    null,
+                                    'chawcalasfdsafkn with yasdafjds on toast'
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'h3',
+                                { className: 'menuTitle' },
+                                'Main'
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                _react2.default.createElement(
+                                    'small',
+                                    null,
+                                    'chawcalasfdsafkn with yasdafjds on toast'
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'h3',
+                                { className: 'menuTitle' },
+                                'Dessert'
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                _react2.default.createElement(
+                                    'small',
+                                    null,
+                                    'chawcalasfdsafkn with yasdafjds on toast'
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'h3',
+                                { className: 'menuTitle' },
+                                'Wine pairing'
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                _react2.default.createElement(
+                                    'small',
+                                    null,
+                                    'chawcalasfdsafkn with yasdafjds on toast'
+                                )
+                            )
+                        )
+                    )
+                )
+            );
         }
     }]);
 

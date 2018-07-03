@@ -11,10 +11,7 @@ Colors:
     overflow: hidden;
 } */
 
-.border { 
-    border: 1px solid black;
-}
-
+/* Body */
 body {
     margin: 0;
     padding: 0;
@@ -23,12 +20,13 @@ body {
     color: white;
 }
 
+/* Nav */
 nav {
     width: 100%;
     height: 45px;
     top: 0;
     background-color: white;
-    margin-bottom: 100px;
+    margin-bottom: 35px;
 }
 
 nav .navbar-text {
@@ -38,10 +36,7 @@ nav .navbar-text {
     margin: 0 auto;
 } 
 
-.container {
-    width: 50%;
-}
-
+/* Form */
 .parentAndText {
     position: relative;
 }
@@ -66,4 +61,42 @@ nav .navbar-text {
 
 small.form-text.text-muted {
     color: rgba(0, 0, 0, .65)!important;
+}
+
+/* Results */
+.container.menu {
+    text-align: center;
+    height: 90vh;
+}
+
+h1.menuTitle, h3.menuTitle {
+    font-family: 'Pacifico', cursive;
+}
+
+ul {
+    list-style-type: none;
+    text-align: center;
+    display: block;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 40px;
+}
+
+/* Fix classes */
+.border { 
+    border: 1px solid black;
+}
+
+.container {
+    width: 50%;
+}
+
+.menu hr, .recipes hr {
+    background-color: white;
+}
+
+.container.recipes {
+    width: 80%;
 }
