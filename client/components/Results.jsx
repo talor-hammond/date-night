@@ -71,11 +71,11 @@ class Results extends Component {
 
                     <button onClick={() => this.goToRecipes()}>{button}</button>
 
-                    {
-                        this.state.recipePicked &&
-                        <Recipes recipes={this.state.recipes} />
-                    }
                 </div>
+                {
+                    this.state.recipePicked &&
+                    <Recipes recipes={this.state.recipes} />
+                }
 
 
 

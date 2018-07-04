@@ -22298,9 +22298,9 @@ var Results = function (_Component) {
                                 return _this2.goToRecipes();
                             } },
                         button
-                    ),
-                    this.state.recipePicked && _react2.default.createElement(_Recipes2.default, { recipes: this.state.recipes })
-                )
+                    )
+                ),
+                this.state.recipePicked && _react2.default.createElement(_Recipes2.default, { recipes: this.state.recipes })
             );
         }
     }]);

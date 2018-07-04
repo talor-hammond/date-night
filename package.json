@@ -25,6 +25,7 @@
     "fs": "^0.0.1-security",
     "pdfkit": "^0.8.3",
     "react-router-dom": "^4.3.1",
+    "react-scroll-to-component": "^1.0.2",
     "unirest": "^0.5.1"
   },
   "devDependencies": {
