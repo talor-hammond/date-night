@@ -1,12 +1,18 @@
 import React from 'react'
 
-const Nav = () => {
+class Nav extends React.Component {
 
-    return (
-        <nav className="navbar">
-            <span className="navbar-text">datenite</span>
-        </nav>
-    )
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        return (
+            <nav className="navbar">
+                <span className="navbar-text">datenite</span>
+            </nav>
+        )
+    }
 
 }
 
