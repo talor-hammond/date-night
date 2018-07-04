@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
 class Recipes extends Component {
-
+    
     constructor(props) {
         super(props)
-
+        
         this.state = {
             recipes: this.props.recipes
         }
@@ -13,8 +13,9 @@ class Recipes extends Component {
     componentDidMount() {
         console.log(this.props)
     }
-
+    
     render() {
+        
 
         const {recipes} = this.state // array of recipes.
 

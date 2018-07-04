@@ -22159,7 +22159,8 @@ var Results = function (_Component) {
 
         _this.state = {
             recipePicked: false,
-            recipes: _this.props.recipes // an array in itself; feed it through props to Recipes.jsx
+            recipes: _this.props.recipes, // an array in itself; feed it through props to Recipes.jsx
+            buttonText: 'Show recipes'
         };
 
         _this.goToRecipes = _this.goToRecipes.bind(_this);
@@ -22174,8 +22175,14 @@ var Results = function (_Component) {
     }, {
         key: 'goToRecipes',
         value: function goToRecipes() {
+            if (!this.state.recipePicked) {
+                this.state.buttonText = 'Hide recipes';
+            } else {
+                this.state.buttonText = 'Show recipes';
+            }
+
             this.setState({
-                recipePicked: true
+                recipePicked: !this.state.recipePicked // setting recipePicked to opposite of it in state; and re-rendering
             });
             console.log(this.state.recipePicked);
         }
@@ -22183,6 +22190,8 @@ var Results = function (_Component) {
         key: 'render',
         value: function render() {
             var _this2 = this;
+
+            var button = this.state.buttonText;
 
             var menu = this.props.menu;
             var entree = menu.entree,
@@ -22288,7 +22297,7 @@ var Results = function (_Component) {
                         { onClick: function onClick() {
                                 return _this2.goToRecipes();
                             } },
-                        'Show recipes'
+                        button
                     ),
                     this.state.recipePicked && _react2.default.createElement(_Recipes2.default, { recipes: this.state.recipes })
                 )

@@ -11,7 +11,8 @@ class Results extends Component {
         super(props)
         this.state = {
             recipePicked: false,
-            recipes: this.props.recipes // an array in itself; feed it through props to Recipes.jsx
+            recipes: this.props.recipes, // an array in itself; feed it through props to Recipes.jsx
+            buttonText: 'Show recipes'
         }
 
         this.goToRecipes = this.goToRecipes.bind(this)
@@ -22,13 +23,21 @@ class Results extends Component {
     }
 
     goToRecipes() {
+        if (!this.state.recipePicked) {
+            this.state.buttonText = 'Hide recipes'
+        } else {
+            this.state.buttonText = 'Show recipes'
+        }
+
         this.setState({
-            recipePicked: true
+            recipePicked: !this.state.recipePicked // setting recipePicked to opposite of it in state; and re-rendering
         })
         console.log(this.state.recipePicked)
     }
 
     render() {
+        let button = this.state.buttonText
+
         const { menu } = this.props
         const { entree, main, dessert, wine } = menu
 
@@ -60,7 +69,7 @@ class Results extends Component {
                         )}
                     </ul>
 
-                    <button onClick={() => this.goToRecipes()}>Show recipes</button>
+                    <button onClick={() => this.goToRecipes()}>{button}</button>
 
                     {
                         this.state.recipePicked &&
