@@ -19611,26 +19611,8 @@ var App = function (_Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      results: {
-        menu: {
-          entree: "Broad Bean, Pea And Goat Cheese Bruschetta",
-          main: "Chicken Cordon Bleu Pasta",
-          dessert: "Vegan Cranberry Pistachio Biscotti",
-          winePairing: 'Sauvignon blanc',
-          nameOne: 'tay',
-          nameTwo: 'ct'
-        },
-        recipes: [{
-          ingredients: ['alfredo sauce', "chicken strips", "deli ham", "pasta", "swiss cheese"],
-          instructions: "Bake the frozen chicken you chose according to the package directions on the back.Boil the noodles according to the package directions for the type you chose. When cooked, drain out all the water.When the chicken is cooked, slice into smaller pieces.Add the chicken to the noodles. Pour the jar of alfredo sauce over the chicken and noodles. Stir to mix it all up. Add the ham to the mixture. Make sure you break up the pieces of ham from each other, they like to stick together.Add the shredded cheese, mix together.Serve piping hot.",
-          title: "Chicken Cordon Bleu Pasta"
-        }, {
-          ingredients: ['alfredo sauce', "chicken strips", "deli ham", "pasta", "swiss cheese"],
-          instructions: "Bake the frozen chicken you chose according to the package directions on the back.Boil the noodles according to the package directions for the type you chose. When cooked, drain out all the water.When the chicken is cooked, slice into smaller pieces.Add the chicken to the noodles. Pour the jar of alfredo sauce over the chicken and noodles. Stir to mix it all up. Add the ham to the mixture. Make sure you break up the pieces of ham from each other, they like to stick together.Add the shredded cheese, mix together.Serve piping hot.",
-          title: "Chicken Cordon Bleu Pasta"
-        }]
-      },
-      submitted: true
+      results: {},
+      submitted: false
     };
 
     _this.goBack = _this.goBack.bind(_this);
@@ -19645,6 +19627,8 @@ var App = function (_Component) {
         results: results,
         submitted: true
       });
+
+      console.log(results);
     }
   }, {
     key: 'goBack',
@@ -19786,6 +19770,8 @@ var Form = function (_Component) {
         value: function submitButton(e) {
             e.preventDefault();
 
+            console.log(this.state);
+
             this.getResults(this.state.nameOne, this.state.nameTwo, this.state.food, this.state.cuisine, this.state.diet, this.state.winePairing, this.state.email);
             // NOTE: can't I pass the object this.state???????
         }
@@ -19849,9 +19835,9 @@ var Form = function (_Component) {
                     'div',
                     { className: 'container' },
                     _react2.default.createElement(
-                        'h5',
-                        null,
-                        'Building a menu for...'
+                        'h3',
+                        { className: 'fancy' },
+                        'Build a menu for...'
                     ),
                     _react2.default.createElement(
                         'form',
@@ -19861,23 +19847,14 @@ var Form = function (_Component) {
                             { className: 'form-row' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'col-md-5' },
+                                { className: 'col-md-6' },
                                 _react2.default.createElement('input', { type: 'text', name: 'nameOne', className: 'form-control', onChange: function onChange(e) {
                                         return _this3.handleChange(e);
                                     } })
                             ),
                             _react2.default.createElement(
                                 'div',
-                                { className: 'col parentAndText' },
-                                _react2.default.createElement(
-                                    'p',
-                                    { className: 'andText' },
-                                    'and...'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'col-md-5' },
+                                { className: 'col-md-6' },
                                 _react2.default.createElement('input', { type: 'text', name: 'nameTwo', className: 'form-control', onChange: function onChange(e) {
                                         return _this3.handleChange(e);
                                     } })
@@ -19900,6 +19877,7 @@ var Form = function (_Component) {
                                 { className: 'form-text text-muted' },
                                 'Italian, thai, chinese, etc.'
                             ),
+                            _react2.default.createElement('br', null),
                             _react2.default.createElement(
                                 'label',
                                 null,
@@ -19996,8 +19974,8 @@ function getEntreeBy(cuisine, diet) {
 
 function getMainBy(food, cuisine, diet) {
   // if a diet was specified:
-  if (diet) {
-    return _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=" + food + "&cuisine=" + cuisine + "&diet=" + diet + "&limitLicense=false&type=main+course&minCalories=700&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
+  if (!food) {
+    return _superagent2.default.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?cuisine=" + cuisine + "&limitLicense=false&type=main+course&minCalories=700&offset=0&number=100").set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
     .then(function (res) {
 
       var mains = res.body.results;
@@ -22151,10 +22129,6 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(18);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 var _reactScrollToComponent = __webpack_require__(40);
 
 var _reactScrollToComponent2 = _interopRequireDefault(_reactScrollToComponent);
@@ -22201,16 +22175,12 @@ var Results = function (_Component) {
     }
 
     _createClass(Results, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            console.log(this.state.recipePicked);
-        }
-    }, {
         key: 'handleScrollToElement',
         value: function handleScrollToElement() {
             (0, _reactScrollToComponent2.default)(this.refs.recipesList, {
-                offset: -80,
-                duration: 1200
+                duration: 1200,
+                ease: 'inOutCirc',
+                align: 'top'
             });
         }
     }, {
@@ -22238,8 +22208,6 @@ var Results = function (_Component) {
                 this.setState({ // causing a re-render...
                     recipePicked: false,
                     backToTop: false
-                }, function () {
-                    console.log('lol');
                 });
             }
         }
@@ -22257,9 +22225,8 @@ var Results = function (_Component) {
                         backToTop: false
                     }, function () {
                         (0, _reactScrollToComponent2.default)(_this3.refs.top, {
-                            offset: -100,
                             duration: 1200,
-                            align: 'bottom',
+                            align: 'top',
                             ease: 'inOutCirc'
                         });
                     });
@@ -22374,7 +22341,7 @@ var Results = function (_Component) {
                     ),
                     _react2.default.createElement(
                         'button',
-                        { onClick: function onClick() {
+                        { className: 'btn btn-primary btn-sm', onClick: function onClick() {
                                 return _this4.goToRecipes();
                             } },
                         button
@@ -22386,7 +22353,7 @@ var Results = function (_Component) {
                     { className: 'containerButton' },
                     _react2.default.createElement(
                         'button',
-                        { onClick: function onClick() {
+                        { className: 'btn btn-primary btn-sm', onClick: function onClick() {
                                 return _this4.goToTop();
                             } },
                         'Back to top'

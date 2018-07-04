@@ -12,7 +12,6 @@ class Recipes extends Component {
     
     render() {
         
-
         const {recipes} = this.state // array of recipes.
 
         return (

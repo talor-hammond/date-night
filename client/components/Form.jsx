@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import api from '../apiClient'
 
@@ -33,6 +33,8 @@ class Form extends Component {
 
     submitButton(e) {
         e.preventDefault()
+
+        console.log(this.state)
 
         this.getResults(this.state.nameOne, this.state.nameTwo, this.state.food, this.state.cuisine, this.state.diet, this.state.winePairing, this.state.email)
         // NOTE: can't I pass the object this.state???????
@@ -87,18 +89,17 @@ class Form extends Component {
         return (
             <React.Fragment>
                 <div className="container">
-                    <h5>Building a menu for...</h5>
+
+                    <h3 className="fancy">Build a menu for...</h3>
 
                     <form>
 
                         <div className="form-row">
-                            <div className="col-md-5">
+                            <div className="col-md-6">
                                 <input type="text" name="nameOne" className="form-control" onChange={(e) => this.handleChange(e)} />
                             </div>
-                            <div className="col parentAndText">
-                                <p className="andText">and...</p>
-                            </div>
-                            <div className="col-md-5">
+
+                            <div className="col-md-6">
                                 <input type="text" name="nameTwo" className="form-control" onChange={(e) => this.handleChange(e)} />
                             </div>
                         </div>
@@ -109,6 +110,7 @@ class Form extends Component {
                             <label>What cuisine?</label>
                             <input type="text" name="cuisine" className="form-control" onChange={(e) => this.handleChange(e)} />
                             <small className="form-text text-muted">Italian, thai, chinese, etc.</small>
+                            <br />
                             <label>Any particular food?</label>
                             <input type="text" name="food" className="form-control" onChange={(e) => this.handleChange(e)} />
                             <small className="form-text text-muted">Pasta, curry, mulch, etc.</small>

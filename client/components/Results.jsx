@@ -1,6 +1,5 @@
 // React +
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import scrollToComponent from 'react-scroll-to-component'
 
 // Components
@@ -23,15 +22,11 @@ class Results extends Component {
         this.goToTop = this.goToTop.bind(this)
     }
 
-    componentDidMount() {
-        console.log(this.state.recipePicked);
-
-    }
-
     handleScrollToElement() {
         scrollToComponent(this.refs.recipesList, {
-            offset: -80,
-            duration: 1200
+            duration: 1200,
+            ease: 'inOutCirc',
+            align: 'top'
         })
     }
 
@@ -54,8 +49,6 @@ class Results extends Component {
             this.setState({ // causing a re-render...
                 recipePicked: false,
                 backToTop: false,
-            }, () => {
-                console.log('lol')
             })
         }
 
@@ -71,9 +64,8 @@ class Results extends Component {
                     backToTop: false
                 }, () => {
                     scrollToComponent(this.refs.top, {
-                        offset: -100,
                         duration: 1200,
-                        align: 'bottom',
+                        align: 'top',
                         ease: 'inOutCirc'
                     })
                 })
@@ -116,7 +108,7 @@ class Results extends Component {
                         )}
                     </ul>
 
-                    <button onClick={() => this.goToRecipes()}>{button}</button>
+                    <button className="btn btn-primary btn-sm" onClick={() => this.goToRecipes()}>{button}</button>
 
                 </div>
                 {
@@ -126,7 +118,7 @@ class Results extends Component {
                 {
                     this.state.backToTop && (
                         <div className="containerButton">
-                            <button onClick={() => this.goToTop()}>Back to top</button>
+                            <button className="btn btn-primary btn-sm" onClick={() => this.goToTop()}>Back to top</button>
                         </div>
                     )
                 }

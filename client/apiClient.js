@@ -48,9 +48,9 @@ function getEntreeBy(cuisine, diet) {
 
 function getMainBy(food, cuisine, diet) {
   // if a diet was specified:
-  if (diet) {
+  if (!food) {
     return request
-      .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?query=${food}&cuisine=${cuisine}&diet=${diet}&limitLicense=false&type=main+course&minCalories=700&offset=0&number=100`)
+      .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?cuisine=${cuisine}&limitLicense=false&type=main+course&minCalories=700&offset=0&number=100`)
       .set({ "X-Mashape-Key": mashapeKey, "X-Mashape-Host": mashapeHost }) // setting header w object: '.header(s)'
       .then((res) => {
 
