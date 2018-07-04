@@ -92,12 +92,13 @@ h1.menuTitle, h3.menuTitle, .fancy {
 }
 
 .container.menu {
-    width: 30%;
+    width: 40%;
 }
 
 .recipesContainer {
     width: 80%;
     margin: 0 auto;
+    z-index: 0;
 }
 
 .menu hr, .recipesContainer hr {

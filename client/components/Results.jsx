@@ -1,19 +1,35 @@
+// React +
 import React, { Component } from 'react'
 
+// Components
 import Nav from './Nav'
+import Recipes from './Recipes'
 
 class Results extends Component {
 
     constructor(props) {
         super(props)
+        this.state = {
+            recipePicked: false,
+            recipes: this.props.recipes // an array in itself; feed it through props to Recipes.jsx
+        }
+
+        this.goToRecipes = this.goToRecipes.bind(this)
     }
 
     componentDidMount() {
         console.log(this.props)
     }
 
+    goToRecipes() {
+        this.setState({
+            recipePicked: true
+        })
+        console.log(this.state.recipePicked)
+    }
+
     render() {
-        const { menu, recipes } = this.props
+        const { menu } = this.props
         const { entree, main, dessert, wine } = menu
 
         return (
@@ -21,7 +37,7 @@ class Results extends Component {
                 <Nav />
                 <div className="container menu">
 
-                    <h1 className="menuTitle">Your menu</h1>
+                    <h1 className="menuTitle">{menu.nameOne} & {menu.nameTwo}'s menueeeeee</h1>
                     <hr />
                     <ul>
                         <li>
@@ -44,46 +60,15 @@ class Results extends Component {
                         )}
                     </ul>
 
+                    <button onClick={() => this.goToRecipes()}>Show recipes</button>
+
+                    {
+                        this.state.recipePicked &&
+                        <Recipes recipes={this.state.recipes} />
+                    }
                 </div>
 
-                <div className="recipesContainer">
 
-                    <h1 className="menuTitle">Recipes</h1>
-                    <hr />
-
-                    {recipes.map((recipe, i) => {
-                        return (
-                            <React.Fragment key={i}>
-
-                                <div className="row">
-                                    <div className="col">
-                                        <h4 className="fancy">{recipe.title}</h4>
-                                    </div>
-                                </div>
-                                <br />
-
-                                <div className="row">
-                                    <div className="col-3">
-                                        <h5 className="fancy">Ingredients:</h5>
-                                        <ul>
-                                            {recipe.ingredients.map((ingredient, i) => {
-                                                return <li key={i} className="text-capitalize">{ingredient}</li>
-                                            })}
-                                        </ul>
-                                    </div>
-
-                                    <div className="col-9">
-                                        <h5 className="fancy">Instructions:</h5>
-                                        <p>{recipe.instructions}</p>
-                                    </div>
-                                </div>
-
-                                <br/><br/>
-
-                            </React.Fragment>
-                        )
-                    })}
-                </div>
 
             </React.Fragment>
         )

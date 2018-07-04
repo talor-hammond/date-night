@@ -60,11 +60,26 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(15);
+} else {
+  module.exports = __webpack_require__(16);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -254,7 +269,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -311,10 +326,10 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 
 module.exports = invariant;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -356,7 +371,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -453,7 +468,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -474,22 +489,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = emptyObject;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(13);
-} else {
-  module.exports = __webpack_require__(14);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 6 */
@@ -506,7 +506,7 @@ if (process.env.NODE_ENV === 'production') {
 
 
 
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -558,7 +558,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = warning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 7 */
@@ -575,9 +575,9 @@ module.exports = warning;
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(1);
+  var invariant = __webpack_require__(2);
   var warning = __webpack_require__(6);
-  var ReactPropTypesSecret = __webpack_require__(15);
+  var ReactPropTypesSecret = __webpack_require__(17);
   var loggedTypeFailures = {};
 }
 
@@ -625,7 +625,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 
 module.exports = checkPropTypes;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 8 */
@@ -795,7 +795,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(18);
+var isTextNode = __webpack_require__(20);
 
 /*eslint-disable no-bitwise */
 
@@ -829,15 +829,69 @@ module.exports = containsNode;
 "use strict";
 
 
-var _react = __webpack_require__(5);
+/**
+ * Check if `obj` is an object.
+ *
+ * @param {Object} obj
+ * @return {Boolean}
+ * @api private
+ */
+
+function isObject(obj) {
+  return null !== obj && 'object' === typeof obj;
+}
+
+module.exports = isObject;
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(16);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Nav = function Nav() {
+
+    return _react2.default.createElement(
+        "nav",
+        { className: "navbar" },
+        _react2.default.createElement(
+            "span",
+            { className: "navbar-text" },
+            "datenite"
+        )
+    );
+};
+
+exports.default = Nav;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _App = __webpack_require__(25);
+var _App = __webpack_require__(27);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -848,7 +902,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -861,7 +915,7 @@ document.addEventListener('DOMContentLoaded', function () {
  * LICENSE file in the root directory of this source tree.
  */
 
-var m=__webpack_require__(3),n=__webpack_require__(1),p=__webpack_require__(4),q=__webpack_require__(2),r="function"===typeof Symbol&&Symbol["for"],t=r?Symbol["for"]("react.element"):60103,u=r?Symbol["for"]("react.portal"):60106,v=r?Symbol["for"]("react.fragment"):60107,w=r?Symbol["for"]("react.strict_mode"):60108,x=r?Symbol["for"]("react.provider"):60109,y=r?Symbol["for"]("react.context"):60110,z=r?Symbol["for"]("react.async_mode"):60111,A=r?Symbol["for"]("react.forward_ref"):
+var m=__webpack_require__(4),n=__webpack_require__(2),p=__webpack_require__(5),q=__webpack_require__(3),r="function"===typeof Symbol&&Symbol["for"],t=r?Symbol["for"]("react.element"):60103,u=r?Symbol["for"]("react.portal"):60106,v=r?Symbol["for"]("react.fragment"):60107,w=r?Symbol["for"]("react.strict_mode"):60108,x=r?Symbol["for"]("react.provider"):60109,y=r?Symbol["for"]("react.context"):60110,z=r?Symbol["for"]("react.async_mode"):60111,A=r?Symbol["for"]("react.forward_ref"):
 60112,B="function"===typeof Symbol&&Symbol.iterator;function C(a){for(var b=arguments.length-1,e="http://reactjs.org/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)e+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);n(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",e)}var D={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};
 function E(a,b,e){this.props=a;this.context=b;this.refs=p;this.updater=e||D}E.prototype.isReactComponent={};E.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?C("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};E.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};function F(){}F.prototype=E.prototype;function G(a,b,e){this.props=a;this.context=b;this.refs=p;this.updater=e||D}var H=G.prototype=new F;
 H.constructor=G;m(H,E.prototype);H.isPureReactComponent=!0;var I={current:null},J=Object.prototype.hasOwnProperty,K={key:!0,ref:!0,__self:!0,__source:!0};
@@ -877,7 +931,7 @@ Y=X&&W||X;module.exports=Y["default"]?Y["default"]:Y;
 
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -898,11 +952,11 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(3);
-var invariant = __webpack_require__(1);
-var emptyObject = __webpack_require__(4);
+var _assign = __webpack_require__(4);
+var invariant = __webpack_require__(2);
+var emptyObject = __webpack_require__(5);
 var warning = __webpack_require__(6);
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 var checkPropTypes = __webpack_require__(7);
 
 // TODO: this is special because it gets imported during build.
@@ -2296,10 +2350,10 @@ module.exports = react;
   })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2318,7 +2372,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2356,15 +2410,15 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(17);
+  module.exports = __webpack_require__(19);
 } else {
-  module.exports = __webpack_require__(20);
+  module.exports = __webpack_require__(22);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2380,7 +2434,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var ba=__webpack_require__(1),ea=__webpack_require__(5),m=__webpack_require__(8),A=__webpack_require__(3),C=__webpack_require__(2),fa=__webpack_require__(9),ha=__webpack_require__(10),ja=__webpack_require__(11),ka=__webpack_require__(4);
+var ba=__webpack_require__(2),ea=__webpack_require__(0),m=__webpack_require__(8),A=__webpack_require__(4),C=__webpack_require__(3),fa=__webpack_require__(9),ha=__webpack_require__(10),ja=__webpack_require__(11),ka=__webpack_require__(5);
 function D(a){for(var b=arguments.length-1,c="http://reactjs.org/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);ba(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",c)}ea?void 0:D("227");
 function ma(a,b,c,d,e,f,h,g,k){this._hasCaughtError=!1;this._caughtError=null;var v=Array.prototype.slice.call(arguments,3);try{b.apply(c,v)}catch(l){this._caughtError=l,this._hasCaughtError=!0}}
 var E={_caughtError:null,_hasCaughtError:!1,_rethrowError:null,_hasRethrowError:!1,invokeGuardedCallback:function(a,b,c,d,e,f,h,g,k){ma.apply(E,arguments)},invokeGuardedCallbackAndCatchFirstError:function(a,b,c,d,e,f,h,g,k){E.invokeGuardedCallback.apply(this,arguments);if(E.hasCaughtError()){var v=E.clearCaughtError();E._hasRethrowError||(E._hasRethrowError=!0,E._rethrowError=v)}},rethrowCaughtError:function(){return na.apply(E,arguments)},hasCaughtError:function(){return E._hasCaughtError},clearCaughtError:function(){if(E._hasCaughtError){var a=
@@ -2617,7 +2671,7 @@ X.injectIntoDevTools({findFiberByHostInstance:Ua,bundleType:0,version:"16.3.2",r
 
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2632,7 +2686,7 @@ X.injectIntoDevTools({findFiberByHostInstance:Ua,bundleType:0,version:"16.3.2",r
  * @typechecks
  */
 
-var isNode = __webpack_require__(19);
+var isNode = __webpack_require__(21);
 
 /**
  * @param {*} object The object to check.
@@ -2645,7 +2699,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2673,7 +2727,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2694,19 +2748,19 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var invariant = __webpack_require__(1);
-var React = __webpack_require__(5);
+var invariant = __webpack_require__(2);
+var React = __webpack_require__(0);
 var warning = __webpack_require__(6);
 var ExecutionEnvironment = __webpack_require__(8);
-var _assign = __webpack_require__(3);
-var emptyFunction = __webpack_require__(2);
+var _assign = __webpack_require__(4);
+var emptyFunction = __webpack_require__(3);
 var checkPropTypes = __webpack_require__(7);
 var getActiveElement = __webpack_require__(9);
 var shallowEqual = __webpack_require__(10);
 var containsNode = __webpack_require__(11);
-var emptyObject = __webpack_require__(4);
-var hyphenateStyleName = __webpack_require__(21);
-var camelizeStyleName = __webpack_require__(23);
+var emptyObject = __webpack_require__(5);
+var hyphenateStyleName = __webpack_require__(23);
+var camelizeStyleName = __webpack_require__(25);
 
 // Relying on the `invariant()` implementation lets us
 // have preserve the format and params in the www builds.
@@ -19332,10 +19386,10 @@ module.exports = reactDom;
   })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19350,7 +19404,7 @@ module.exports = reactDom;
 
 
 
-var hyphenate = __webpack_require__(22);
+var hyphenate = __webpack_require__(24);
 
 var msPattern = /^ms-/;
 
@@ -19377,7 +19431,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19413,7 +19467,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19428,7 +19482,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(24);
+var camelize = __webpack_require__(26);
 
 var msPattern = /^-ms-/;
 
@@ -19456,7 +19510,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19491,7 +19545,7 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19503,7 +19557,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(5);
+var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -19599,60 +19653,6 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Check if `obj` is an object.
- *
- * @param {Object} obj
- * @return {Boolean}
- * @api private
- */
-
-function isObject(obj) {
-  return null !== obj && 'object' === typeof obj;
-}
-
-module.exports = isObject;
-
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(5);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Nav = function Nav() {
-
-    return _react2.default.createElement(
-        "nav",
-        { className: "navbar" },
-        _react2.default.createElement(
-            "span",
-            { className: "navbar-text" },
-            "datenite"
-        )
-    );
-};
-
-exports.default = Nav;
-
-/***/ }),
 /* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19663,7 +19663,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _react = __webpack_require__(5);
+var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -19671,7 +19671,7 @@ var _Form = __webpack_require__(29);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _Nav = __webpack_require__(27);
+var _Nav = __webpack_require__(13);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
@@ -19705,7 +19705,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(5);
+var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -20091,7 +20091,7 @@ if (typeof window !== 'undefined') { // Browser window
 
 var Emitter = __webpack_require__(32);
 var RequestBase = __webpack_require__(33);
-var isObject = __webpack_require__(26);
+var isObject = __webpack_require__(12);
 var ResponseBase = __webpack_require__(34);
 var Agent = __webpack_require__(36);
 
@@ -21176,7 +21176,7 @@ Emitter.prototype.hasListeners = function(event){
 /**
  * Module of mixed-in functions shared between node and client code
  */
-var isObject = __webpack_require__(26);
+var isObject = __webpack_require__(12);
 
 /**
  * Expose `RequestBase`.
@@ -22125,13 +22125,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(5);
+var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Nav = __webpack_require__(27);
+var _Nav = __webpack_require__(13);
 
 var _Nav2 = _interopRequireDefault(_Nav);
+
+var _Recipes = __webpack_require__(38);
+
+var _Recipes2 = _interopRequireDefault(_Recipes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22139,7 +22143,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // React +
+
+
+// Components
+
 
 var Results = function (_Component) {
     _inherits(Results, _Component);
@@ -22147,7 +22155,15 @@ var Results = function (_Component) {
     function Results(props) {
         _classCallCheck(this, Results);
 
-        return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
+
+        _this.state = {
+            recipePicked: false,
+            recipes: _this.props.recipes // an array in itself; feed it through props to Recipes.jsx
+        };
+
+        _this.goToRecipes = _this.goToRecipes.bind(_this);
+        return _this;
     }
 
     _createClass(Results, [{
@@ -22156,11 +22172,19 @@ var Results = function (_Component) {
             console.log(this.props);
         }
     }, {
+        key: 'goToRecipes',
+        value: function goToRecipes() {
+            this.setState({
+                recipePicked: true
+            });
+            console.log(this.state.recipePicked);
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var _props = this.props,
-                menu = _props.menu,
-                recipes = _props.recipes;
+            var _this2 = this;
+
+            var menu = this.props.menu;
             var entree = menu.entree,
                 main = menu.main,
                 dessert = menu.dessert,
@@ -22177,7 +22201,10 @@ var Results = function (_Component) {
                     _react2.default.createElement(
                         'h1',
                         { className: 'menuTitle' },
-                        'Your menu'
+                        menu.nameOne,
+                        ' & ',
+                        menu.nameTwo,
+                        '\'s menueeeeee'
                     ),
                     _react2.default.createElement('hr', null),
                     _react2.default.createElement(
@@ -22255,77 +22282,15 @@ var Results = function (_Component) {
                                 )
                             )
                         )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'recipesContainer' },
-                    _react2.default.createElement(
-                        'h1',
-                        { className: 'menuTitle' },
-                        'Recipes'
                     ),
-                    _react2.default.createElement('hr', null),
-                    recipes.map(function (recipe, i) {
-                        return _react2.default.createElement(
-                            _react2.default.Fragment,
-                            { key: i },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col' },
-                                    _react2.default.createElement(
-                                        'h4',
-                                        { className: 'fancy' },
-                                        recipe.title
-                                    )
-                                )
-                            ),
-                            _react2.default.createElement('br', null),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col-3' },
-                                    _react2.default.createElement(
-                                        'h5',
-                                        { className: 'fancy' },
-                                        'Ingredients:'
-                                    ),
-                                    _react2.default.createElement(
-                                        'ul',
-                                        null,
-                                        recipe.ingredients.map(function (ingredient, i) {
-                                            return _react2.default.createElement(
-                                                'li',
-                                                { key: i, className: 'text-capitalize' },
-                                                ingredient
-                                            );
-                                        })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col-9' },
-                                    _react2.default.createElement(
-                                        'h5',
-                                        { className: 'fancy' },
-                                        'Instructions:'
-                                    ),
-                                    _react2.default.createElement(
-                                        'p',
-                                        null,
-                                        recipe.instructions
-                                    )
-                                )
-                            ),
-                            _react2.default.createElement('br', null),
-                            _react2.default.createElement('br', null)
-                        );
-                    })
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: function onClick() {
+                                return _this2.goToRecipes();
+                            } },
+                        'Show recipes'
+                    ),
+                    this.state.recipePicked && _react2.default.createElement(_Recipes2.default, { recipes: this.state.recipes })
                 )
             );
         }
@@ -22335,6 +22300,133 @@ var Results = function (_Component) {
 }(_react.Component);
 
 exports.default = Results;
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Recipes = function (_Component) {
+    _inherits(Recipes, _Component);
+
+    function Recipes(props) {
+        _classCallCheck(this, Recipes);
+
+        var _this = _possibleConstructorReturn(this, (Recipes.__proto__ || Object.getPrototypeOf(Recipes)).call(this, props));
+
+        _this.state = {
+            recipes: _this.props.recipes
+        };
+        return _this;
+    }
+
+    _createClass(Recipes, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            console.log(this.props);
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            var recipes = this.state.recipes; // array of recipes.
+
+            return _react2.default.createElement(
+                "div",
+                { className: "recipesContainer" },
+                _react2.default.createElement(
+                    "h1",
+                    { className: "menuTitle" },
+                    "Recipes"
+                ),
+                _react2.default.createElement("hr", null),
+                recipes.map(function (recipe, i) {
+                    return _react2.default.createElement(
+                        _react2.default.Fragment,
+                        { key: i },
+                        _react2.default.createElement(
+                            "div",
+                            { className: "row" },
+                            _react2.default.createElement(
+                                "div",
+                                { className: "col" },
+                                _react2.default.createElement(
+                                    "h4",
+                                    { className: "fancy" },
+                                    recipe.title
+                                )
+                            )
+                        ),
+                        _react2.default.createElement("br", null),
+                        _react2.default.createElement(
+                            "div",
+                            { className: "row" },
+                            _react2.default.createElement(
+                                "div",
+                                { className: "col-3" },
+                                _react2.default.createElement(
+                                    "h5",
+                                    { className: "fancy" },
+                                    "Ingredients:"
+                                ),
+                                _react2.default.createElement(
+                                    "ul",
+                                    null,
+                                    recipe.ingredients.map(function (ingredient, i) {
+                                        return _react2.default.createElement(
+                                            "li",
+                                            { key: i, className: "text-capitalize" },
+                                            ingredient
+                                        );
+                                    })
+                                )
+                            ),
+                            _react2.default.createElement(
+                                "div",
+                                { className: "col-9" },
+                                _react2.default.createElement(
+                                    "h5",
+                                    { className: "fancy" },
+                                    "Instructions:"
+                                ),
+                                _react2.default.createElement(
+                                    "p",
+                                    null,
+                                    recipe.instructions
+                                )
+                            )
+                        ),
+                        _react2.default.createElement("br", null),
+                        _react2.default.createElement("br", null)
+                    );
+                })
+            );
+        }
+    }]);
+
+    return Recipes;
+}(_react.Component);
+
+exports.default = Recipes;
 
 /***/ })
 /******/ ]);
