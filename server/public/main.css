@@ -103,3 +103,10 @@ h1.menuTitle, h3.menuTitle, .fancy {
 .menu hr, .recipesContainer hr {
     background-color: white;
 }
+
+.containerButton {
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}

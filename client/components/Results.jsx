@@ -1,5 +1,7 @@
 // React +
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import scrollToComponent from 'react-scroll-to-component'
 
 // Components
 import Nav from './Nav'
@@ -12,27 +14,72 @@ class Results extends Component {
         this.state = {
             recipePicked: false,
             recipes: this.props.recipes, // an array in itself; feed it through props to Recipes.jsx
-            buttonText: 'Show recipes'
+            buttonText: 'Show recipes',
+            backToTop: false
         }
 
         this.goToRecipes = this.goToRecipes.bind(this)
+        this.handleScrollToElement = this.handleScrollToElement.bind(this)
+        this.goToTop = this.goToTop.bind(this)
     }
 
     componentDidMount() {
-        console.log(this.props)
+        console.log(this.state.recipePicked);
+
+    }
+
+    handleScrollToElement() {
+        scrollToComponent(this.refs.recipesList, {
+            offset: -80,
+            duration: 1200
+        })
     }
 
     goToRecipes() {
-        if (!this.state.recipePicked) {
+        if (!this.state.recipePicked) { // when recipes have been opened...
+
             this.state.buttonText = 'Hide recipes'
-        } else {
+
+            this.setState({ // causing a re-render...
+                recipePicked: true,
+                backToTop: true
+            }, () => {
+                console.log('Callback firing, ' + this.state.recipePicked)
+                this.handleScrollToElement()
+            })
+            console.log(this.state.recipePicked)
+        } else { // when recipes have been closed...
+            console.log(this.state.recipePicked)
             this.state.buttonText = 'Show recipes'
+            this.setState({ // causing a re-render...
+                recipePicked: false,
+                backToTop: false,
+            }, () => {
+                console.log('lol')
+            })
         }
 
+    }
+
+    goToTop() {
         this.setState({
-            recipePicked: !this.state.recipePicked // setting recipePicked to opposite of it in state; and re-rendering
+            backToTop: true
+        }, () => {
+            if (this.state.backToTop) {
+                // after window has scrolled to top...
+                this.setState({
+                    backToTop: false
+                }, () => {
+                    scrollToComponent(this.refs.top, {
+                        offset: -100,
+                        duration: 1200,
+                        align: 'bottom',
+                        ease: 'inOutCirc'
+                    })
+                })
+            }
         })
-        console.log(this.state.recipePicked)
+
     }
 
     render() {
@@ -43,7 +90,7 @@ class Results extends Component {
 
         return (
             <React.Fragment>
-                <Nav />
+                <Nav ref="top" />
                 <div className="container menu">
 
                     <h1 className="menuTitle">{menu.nameOne} & {menu.nameTwo}'s menueeeeee</h1>
@@ -74,10 +121,15 @@ class Results extends Component {
                 </div>
                 {
                     this.state.recipePicked &&
-                    <Recipes recipes={this.state.recipes} />
+                    <Recipes recipes={this.state.recipes} ref="recipesList" />
                 }
-
-
+                {
+                    this.state.backToTop && (
+                        <div className="containerButton">
+                            <button onClick={() => this.goToTop()}>Back to top</button>
+                        </div>
+                    )
+                }
 
             </React.Fragment>
         )
