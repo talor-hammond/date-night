@@ -22178,6 +22178,7 @@ var Results = function (_Component) {
         key: 'handleScrollToElement',
         value: function handleScrollToElement() {
             (0, _reactScrollToComponent2.default)(this.refs.recipesList, {
+                offset: -120,
                 duration: 1200,
                 ease: 'inOutCirc',
                 align: 'top'
@@ -22225,8 +22226,9 @@ var Results = function (_Component) {
                         backToTop: false
                     }, function () {
                         (0, _reactScrollToComponent2.default)(_this3.refs.top, {
+                            offset: -800,
                             duration: 1200,
-                            align: 'top',
+                            align: 'bottom',
                             ease: 'inOutCirc'
                         });
                     });

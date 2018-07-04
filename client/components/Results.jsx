@@ -24,6 +24,7 @@ class Results extends Component {
 
     handleScrollToElement() {
         scrollToComponent(this.refs.recipesList, {
+            offset: -120,
             duration: 1200,
             ease: 'inOutCirc',
             align: 'top'
@@ -64,8 +65,9 @@ class Results extends Component {
                     backToTop: false
                 }, () => {
                     scrollToComponent(this.refs.top, {
+                        offset: -800,
                         duration: 1200,
-                        align: 'top',
+                        align: 'bottom',
                         ease: 'inOutCirc'
                     })
                 })
